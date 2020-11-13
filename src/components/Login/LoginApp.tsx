@@ -7,9 +7,13 @@ const Login: FC = () => {
     console.log('Received values of form: ', values);
   }
 
-  const styleLogin: CSSProperties = {
+  const styleLogin: React.CSSProperties = {
+    display: 'flex',
     width: '25%',
-    margin: 'auto'
+    margin: 'auto',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: 'black'
   }
 
   return (
