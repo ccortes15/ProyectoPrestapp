@@ -1,27 +1,22 @@
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Fragment, FC, useState } from 'react';
+import { Layout, Breadcrumb } from 'antd';
+import { HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { Fragment, FC } from 'react';
 import HeaderContent from './Header';
 import SidebarContent from './Sidebar';
 
-const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
-const Login: FC = () => {
-    const [collapsed, setCollapsed] = useState(false);
-
+const Login: FC = (props) => {
     return (
         <Fragment>
             <Layout>
-                <Sider collapsible collapsed={collapsed} onCollapse={(collapsed) => (setCollapsed(collapsed))}>
-                    <SidebarContent />
-                </Sider>
-
+                <Header style={{ background: 'white', height: '100%', borderBottom: '1px solid #18335C' }} className="header">
+                    <HeaderContent />
+                </Header>
                 <Layout>
-                    <Header className="header">
-                        <HeaderContent />
-                    </Header>
-
+                    <Sider style={{ background: 'white' }} collapsible collapsed={true} trigger={null}>
+                        <SidebarContent />
+                    </Sider>
                     <Content
                         className="site-layout-background"
                         style={{
@@ -30,13 +25,18 @@ const Login: FC = () => {
                             minHeight: 280,
                         }}
                     >
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
+                        <Breadcrumb>
+                            <Breadcrumb.Item href="">
+                                <HomeOutlined />
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item href="">
+                                <UserOutlined />
+                                <span>Application List</span>
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item>Application</Breadcrumb.Item>
                         </Breadcrumb>
-                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            Bill is a cat.
+                        <div className="site-layout-background" style={{ padding: 20, minHeight: 360 }}>
+                            {props.children}
                         </div>
                     </Content>
                 </Layout>

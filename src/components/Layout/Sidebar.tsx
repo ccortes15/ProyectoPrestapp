@@ -1,5 +1,6 @@
 import { Menu } from 'antd';
-import { SettingOutlined, FundProjectionScreenOutlined, ReconciliationOutlined } from '@ant-design/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChalkboard, faMoneyCheckAlt, faHandHoldingUsd, faUser, faCogs } from '@fortawesome/free-solid-svg-icons'
 import { Fragment, FC } from 'react';
 
 const { SubMenu } = Menu;
@@ -7,18 +8,20 @@ const { SubMenu } = Menu;
 const Sidebar: FC = () => {
     return(
         <Fragment>
-            <Menu theme="dark" mode="inline">
-            <SubMenu key="sub1" icon={<ReconciliationOutlined />} title="Administración">
-              <Menu.Item key="aDeuda">Deudas</Menu.Item>
-              <Menu.Item key="aPago">Pagos</Menu.Item>
-              <Menu.Item key="aCliente">Clientes</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<FundProjectionScreenOutlined />} title="Finanzas">
-              <Menu.Item key="fProyecc">Proyecciones</Menu.Item>
-              <Menu.Item key="fGrafico">Gráficos</Menu.Item>
-              <Menu.Item key="fAcredor">Acredores</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub3" icon={<SettingOutlined />} title="Opciones">
+            <Menu theme="light" mode="inline">
+              <Menu.Item key="dashboard" icon={<FontAwesomeIcon icon={faChalkboard} />} >
+                <div>Dashboard</div>
+                </Menu.Item>
+              <Menu.Item key="aDeuda" icon={<FontAwesomeIcon icon={faMoneyCheckAlt} />} >
+                <div>Deudas</div>
+                </Menu.Item>
+              <Menu.Item key="aPago" icon={<FontAwesomeIcon icon={faHandHoldingUsd} />}>
+                <div>Pagos</div>
+              </Menu.Item>
+              <Menu.Item key="aCliente" icon={<FontAwesomeIcon icon={faUser} />}>
+                <div>Clientes</div>
+              </Menu.Item>
+            <SubMenu key="sub3" icon={<FontAwesomeIcon icon={faCogs} />} >
               <Menu.Item key="oAyuda">Ayuda</Menu.Item>
               <Menu.Item key="oError">Reportar error</Menu.Item>
               <Menu.Item key="oCliente">Clientes</Menu.Item>

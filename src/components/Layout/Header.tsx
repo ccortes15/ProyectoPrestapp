@@ -14,7 +14,7 @@ const Header: FC = () => {
                 <Col flex="auto">
                     <Row justify="end">
                         <Col>
-                            <Menu theme="dark" mode="horizontal" style={{ float: 'right' }}>
+                            <Menu theme="light" mode="horizontal" style={{ float: 'right' }}>
                                 <SubMenu title="Agregar" key="add" icon={<PlusOutlined />}>
                                     <Menu.Item key="addDebt" icon={<PlusOutlined />}>
                                         Agregar deuda
