@@ -1,66 +1,84 @@
-import { Form, Input, Button, Checkbox, Card } from 'antd';
-import { Fragment, FC, CSSProperties } from 'react';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Fragment, FC, useState } from 'react';
+import React from "react";
+import { Card, Form, Input, Button, Checkbox, Row, Col } from "antd";
 
-const Login: FC = () => {
-  const onFinish = (values: Object) => {
-    console.log('Received values of form: ', values);
-  }
 
-  const styleLogin: React.CSSProperties = {
-    display: 'flex',
-    width: '25%',
-    margin: 'auto',
-    justifyContent: 'center',
-    alignItems: 'center',
-    background: 'black'
-  }
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
 
-  return (
-    <Fragment>
-      <Card style={styleLogin}>
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-      >
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: 'Please input your Username!' }]}
-        >
-          <Input prefix={<UserOutlined />} placeholder="Username" />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: 'Please input your Password!' }]}
-        >
-          <Input
-            prefix={<LockOutlined />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
-        <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+const Login: React.FC = () => {
+  
+  const onFinish = values => {
+    console.log('Success:', values);
+  };
 
-          <a className="login-form-forgot" href="">
-            Forgot password
-      </a>
-        </Form.Item>
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
+  };
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
-            Log in
-      </Button>
-      Or <a href="">register now!</a>
-        </Form.Item>
-      </Form>
-      </Card>
-    </Fragment>
+  return(
+
+    <Row justify = "center" style = {{ marginTop: "60px"}}>
+      <Col>
+        <Card className = "Login" title= "Inicio de sesión" >
+          <Row style = {{background: "black", width: "80px", height: "80px", margin: "20px 0px 20px 50px"}}>
+            
+          </Row>
+          <Row>
+            <Form
+              {...layout}
+              name="basic"
+              initialValues={{ remember: true }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+            >
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+              >
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+
+              <Form.Item {...tailLayout}>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Form.Item>
+            </Form>
+          </Row>
+
+            <br/>
+
+          <Row justify = "center" style = {{margin: "0px 20px 0px 20px", padding: "10px", borderTop: "1px solid lightgrey" }}>
+            OR
+          </Row>
+          <Row justify = "center" style = {{margin: "0px 20px 0px 20px", padding: "10px"}}>
+            <Button>Sign in with Google</Button>
+          </Row>
+        </Card>
+      </Col>
+    </Row>
+
   )
+
 };
 
 export default Login;
