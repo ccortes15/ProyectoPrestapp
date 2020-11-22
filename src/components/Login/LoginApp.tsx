@@ -1,84 +1,149 @@
-import { Fragment, FC, useState } from 'react';
-import React from "react";
-import { Card, Form, Input, Button, Checkbox, Row, Col } from "antd";
-
+import { Form, Input, Button, Checkbox, Row, Col, Card, message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
 };
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
+const inputLayout = {
+  wrapperCol: {
+    span: 24,
+  },
 };
 
-const Login: React.FC = () => {
-  
-  const onFinish = values => {
-    console.log('Success:', values);
+const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const onFinish = (values) => {
+    const user = {
+      username: values.username,
+      password: values.password,
+    };
+    // signIn('credentials', user)
+    //   .then(() => {
+    //     console.log('Succefully signIn');
+    //     router.reload();
+    //     return;
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     message.error(error);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   };
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
+    setLoading(false);
     console.log('Failed:', errorInfo);
   };
 
-  return(
-
-    <Row justify = "center" style = {{ marginTop: "60px"}}>
+  return (
+    <Row justify="center" style={{ paddingTop: 20 }}>
       <Col>
-        <Card className = "Login" title= "Inicio de sesión" >
-          <Row style = {{background: "black", width: "80px", height: "80px", margin: "20px 0px 20px 50px"}}>
-            
-          </Row>
-          <Row>
-            <Form
-              {...layout}
-              name="basic"
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-            >
-              <Form.Item
-                label="Username"
+        <Card
+          style={{
+            boxShadow: '0px 5px 6px 1px rgba(0,0,0,0.21)',
+          }}
+          cover={<img alt="logoLogin" src="/logo-comepo.png" />}>
+          <Form
+            {...layout}
+            className="login-form"
+            name="login"
+            initialValues={{
+              remember: true,
+            }}
+            method="POST"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}>
+            <Form.Item
+              {...inputLayout}
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: 'Ingrese un usuario válido',
+                },
+              ]}>
+              <Input
+                placeholder="Usuario"
                 name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
-              >
-                <Input />
-              </Form.Item>
+                prefix={<UserOutlined className="site-form-item-icon" />}
+              />
+            </Form.Item>
 
-              <Form.Item
-                label="Password"
+            <Form.Item
+              {...inputLayout}
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Ingrese una contraseña',
+                },
+              ]}>
+              <Input.Password
+                placeholder="Contraseña"
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-              >
-                <Input.Password />
-              </Form.Item>
+                prefix={<LockOutlined className="site-form-item-icon" />}
+              />
+            </Form.Item>
 
-              <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
+            <Form.Item {...inputLayout} name="remember" valuePropName="checked">
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
 
-              <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form>
-          </Row>
+            <Form.Item {...inputLayout}>
+              <Button
+                type="primary"
+                style={{
+                  backgroundColor: '#35997B',
+                  boxShadow: '0px 5px 6px 1px rgba(0,0,0,0.21)',
+                  border: 'none',
+                }}
+                htmlType="submit"
+                className="login-form-button"
+                onClick={() => {
+                  setLoading(true);
+                }}
+                block
+                loading={loading}>
+                Enviar
+              </Button>
+            </Form.Item>
 
             <br/>
 
-          <Row justify = "center" style = {{margin: "0px 20px 0px 20px", padding: "10px", borderTop: "1px solid lightgrey" }}>
-            OR
-          </Row>
-          <Row justify = "center" style = {{margin: "0px 20px 0px 20px", padding: "10px"}}>
-            <Button>Sign in with Google</Button>
-          </Row>
+            <Form.Item {...inputLayout}>
+              <Button
+                type="ghost"
+                style={{
+                  backgroundColor: 'white',
+                  boxShadow: '0px 5px 6px 1px rgba(0,0,0,0.21)',
+                  border: 'none',
+                }}
+                className="login-form-button"
+                onClick={() => {
+                  setLoading(true);
+                }}
+                block
+                loading={loading}>
+                Inicia sesión con Google
+              </Button>
+            </Form.Item>
+
+          </Form>
         </Card>
       </Col>
     </Row>
-
-  )
-
+  );
 };
 
 export default Login;
