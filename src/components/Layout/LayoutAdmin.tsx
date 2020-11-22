@@ -1,22 +1,25 @@
 import { Layout, Breadcrumb } from 'antd';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-import { Fragment, FC } from 'react';
+import { Fragment, FC, useState } from 'react';
 import HeaderContent from './Header';
 import SidebarContent from './Sidebar';
 
 const { Header, Content, Sider } = Layout;
 
 const Login: FC = (props) => {
+    const [collapsed, setCollapsed] = useState(false)
+
     return (
         <Fragment>
             <Layout>
-                <Header style={{ background: 'white', height: '100%', borderBottom: '1px solid #18335C' }} className="header">
-                    <HeaderContent />
-                </Header>
+                <Sider style={{ background: 'white' }} width={150} collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)} >
+                    <SidebarContent />
+                </Sider>
+
                 <Layout>
-                    <Sider style={{ background: 'white' }} collapsible collapsed={true} trigger={null}>
-                        <SidebarContent />
-                    </Sider>
+                    <Header style={{ background: 'white' }} className="header">
+                        <HeaderContent />
+                    </Header>
                     <Content
                         className="site-layout-background"
                         style={{
