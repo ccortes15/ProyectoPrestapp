@@ -1,107 +1,126 @@
-import React, { Fragment } from 'react'
-import { Form, Col, Row, Input, Select, DatePicker } from 'antd';
+import React, { ChangeEvent, Fragment, useState } from 'react'
+import { Form, Col, Row, Input } from 'antd';
+import { __values } from 'tslib';
 
-const { Option } = Select;
 
-interface Props {
+const ClientItem: React.FC = () => {
 
-}
+    const [ nombre, setNombre ] = useState<ChangeEvent<HTMLInputElement>>()
+    const [ correoE, setCorreoE ] = useState<ChangeEvent<HTMLInputElement>>()
+    const [ telefono, setTelefono ] = useState<ChangeEvent<HTMLInputElement>>()
+    const [ calleNum, setCalleNum ] = useState<ChangeEvent<HTMLInputElement>>()
+    const [ localidad, setLocalidad ] = useState<ChangeEvent<HTMLInputElement>>()
+    const [ estado, setEstado ] = useState<ChangeEvent<HTMLInputElement>>()
 
-const ClientItem: React.FC<Props> = () => {
         return (
             <Fragment>
                 <Form layout="vertical" hideRequiredMark>
                     <Row gutter={16}>
                         <Col span={12}>
-                        <Form.Item
-                            name="name"
-                            label="Name"
-                            rules={[{ required: true, message: 'Please enter user name' }]}
-                        >
-                            <Input placeholder="Please enter user name" />
-                        </Form.Item>
+                            <h3 
+                                style = {{
+                                    marginBottom: "20px"
+
+                            }} >Datos personales</h3>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="nombreCompleto"
+                                label="Nombre completo"
+                                rules={[{ required: true, message: 'Ingresar nombre completo de cliente' }]}
+                            >
+                                <Input
+                                    onChange={ (value: ChangeEvent<HTMLInputElement>) => setNombre(value) }
+                                    placeholder="Nombre completo" 
+                                />
+                            </Form.Item>
                         </Col>
                         <Col span={12}>
-                        <Form.Item
-                            name="url"
-                            label="Url"
-                            rules={[{ required: true, message: 'Please enter url' }]}
-                        >
-                            <Input
-                            style={{ width: '100%' }}
-                            addonBefore="http://"
-                            addonAfter=".com"
-                            placeholder="Please enter url"
-                            />
-                        </Form.Item>
+                            <Form.Item
+                                name="correo"
+                                label="Correo electrónico"
+                                rules={[{ required: true, message: 'Favor de ingresar correo electrónico' }]}
+                            >
+                                <Input
+                                    onChange={ (value: ChangeEvent<HTMLInputElement>) => setCorreoE(value) }
+                                    type="text"
+                                    placeholder="Ingresa correo electrónico"
+                                />
+                            </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={16}>
                         <Col span={12}>
                         <Form.Item
                             name="owner"
-                            label="Owner"
-                            rules={[{ required: true, message: 'Please select an owner' }]}
+                            label="Telefono"
+                            rules={[{ required: true, message: 'Por favor ingrese telefono de cliente' }]}
                         >
-                            <Select placeholder="Please select an owner">
-                            <Option value="xiao">Xiaoxiao Fu</Option>
-                            <Option value="mao">Maomao Zhou</Option>
-                            </Select>
-                        </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                        <Form.Item
-                            name="type"
-                            label="Type"
-                            rules={[{ required: true, message: 'Please choose the type' }]}
-                        >
-                            <Select placeholder="Please choose the type">
-                            <Option value="private">Private</Option>
-                            <Option value="public">Public</Option>
-                            </Select>
-                        </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
-                        <Col span={12}>
-                        <Form.Item
-                            name="approver"
-                            label="Approver"
-                            rules={[{ required: true, message: 'Please choose the approver' }]}
-                        >
-                            <Select placeholder="Please choose the approver">
-                            <Option value="jack">Jack Ma</Option>
-                            <Option value="tom">Tom Liu</Option>
-                            </Select>
-                        </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                        <Form.Item
-                            name="dateTime"
-                            label="DateTime"
-                            rules={[{ required: true, message: 'Please choose the dateTime' }]}
-                        >
-                            <DatePicker.RangePicker
-                            style={{ width: '100%' }}
-                            getPopupContainer={trigger => trigger.parentElement}
+                            <Input
+                                style={{ width: '100%' }}
+                                type="tel" 
+                                placeholder="Ingrese telefono"
+                                onChange={ (value: ChangeEvent<HTMLInputElement>) => setTelefono(value) }
                             />
                         </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={16}>
                         <Col span={24}>
-                        <Form.Item
-                            name="description"
-                            label="Description"
-                            rules={[
-                            {
-                                required: true,
-                                message: 'please enter url description',
-                            },
-                            ]}
-                        >
-                            <Input.TextArea rows={4} placeholder="please enter url description" />
-                        </Form.Item>
+                            <div style={{borderTop: "2px solid lightgray", marginBottom: "20px"}} />
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <h3
+                                style = {{
+                                    marginBottom: "20px"
+
+                            }} >Datos de residencia</h3>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="calleDir"
+                                label="Calle y número"
+                                rules={[{ required: true, message: 'Favor de ingresar calle y número' }]}
+                            >
+                                <Input
+                                    onChange={ (value: ChangeEvent<HTMLInputElement>) => setCalleNum(value) }
+                                    style={{ width: '100%' }} 
+                                    placeholder="Ingresar calle y número del cliente"
+                                />
+                            </Form.Item>
+                            </Col>
+                            <Col span={12}>
+                            <Form.Item
+                                name="localidad"
+                                label="Colonia o localidad"
+                                rules={[{ required: true, message: 'Favor de ingresar localidad o colonia' }]}
+                            >
+                                <Input
+                                    onChange={ (value: ChangeEvent<HTMLInputElement>) => setLocalidad(value) }
+                                    style={{ width: '100%' }} 
+                                    placeholder="Favor de ingresar localidad o colonia"
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="estado"
+                                label="Estado"
+                            >
+                                <Input
+                                    onChange={ (value: ChangeEvent<HTMLInputElement>) => setEstado(value) }
+                                    style={{ width: '100%' }} 
+                                    placeholder="Ingresar estado de residencia"
+                                />
+                            </Form.Item>
                         </Col>
                     </Row>
                 </Form>

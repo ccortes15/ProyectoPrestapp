@@ -1,5 +1,7 @@
 import { Menu, Row, Col } from 'antd';
-import { PlusOutlined, NotificationOutlined, UserOutlined, UserAddOutlined, SettingOutlined, LogoutOutlined, HistoryOutlined } from '@ant-design/icons';
+import { NotificationOutlined, UserOutlined, UserAddOutlined, SettingOutlined, LogoutOutlined, HistoryOutlined } from '@ant-design/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDollarSign, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Fragment, FC } from 'react';
 import FormContainer from '../Drawer/FormContainer';
 import ClientItem from './../Drawer/Items/ClientItem'
@@ -19,19 +21,19 @@ const Header: FC = () => {
                     <Row justify="end">
                         <Col>
                             <Menu theme="light" mode="horizontal" style={{ float: 'right' }}>
-                                <SubMenu title="Agregar" key="add" icon={<PlusOutlined />}>
-                                    <Menu.Item key="addDebt" icon={<PlusOutlined />}>
-                                        <FormContainer transcType = {"Deuda"} ao = {"a"}>
+                                <SubMenu title="Agregar" key="add" icon={<FontAwesomeIcon style={{marginRight:"15px"}} icon = {faPlus}/>}>
+                                    <Menu.Item key="addDebt" icon={<FontAwesomeIcon style={{marginRight:"15px"}} icon = {faPlus}/>}>
+                                        <FormContainer transcType = {"deuda"} ao = {"a"}>
                                             <DebtItem/>
                                         </FormContainer>
                                     </Menu.Item>
-                                    <Menu.Item key="addPay" icon={<PlusOutlined />}>
-                                        <FormContainer transcType = {"Pago"} ao = {"o"}>
+                                    <Menu.Item key="addPay" icon={<FontAwesomeIcon style={{marginRight:"15px"}} icon = {faDollarSign}/>}>
+                                        <FormContainer transcType = {"pago"} ao = {"o"}>
                                             <PaymentItem/>
                                         </FormContainer>
                                     </Menu.Item>
                                     <Menu.Item key="addClient" icon={<UserAddOutlined />}>
-                                        <FormContainer transcType = {"Cliente"} ao = {"o"}>
+                                        <FormContainer transcType = {"cliente"} ao = {"o"}>
                                             <ClientItem/>
                                         </FormContainer>
                                     </Menu.Item>

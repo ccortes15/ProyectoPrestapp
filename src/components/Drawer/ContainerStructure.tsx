@@ -17,7 +17,7 @@ const DrawerContainer: React.FC<props> = (props) => {
                     Nuev{props.ao} {props.transcType}
                 </Button>
                 <Drawer
-                title="Create a new account"
+                title= {`Agregar un${props.ao} nuev${props.ao} ${props.transcType}`}
                 width={720}
                 onClose={ () => {
                     setVisibility(false)

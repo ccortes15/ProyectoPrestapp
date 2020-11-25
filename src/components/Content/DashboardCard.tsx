@@ -1,4 +1,4 @@
-import { Row, Col, Card, Typography, Avatar, Tooltip } from 'antd';
+import { Row, Col, Card, Typography, Tooltip, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { Fragment, FC } from 'react';
@@ -6,73 +6,109 @@ import { Fragment, FC } from 'react';
 const { Title } = Typography;
 
 const DashboardCards: FC = () => {
-    const avatarStyle = { background: 'transparent', color: '#1890ff' }
+    const warningCard = { borderRadius: 5, background: 'white', border: '2px solid #F5EF40' };
+    const successCard = { borderRadius: 5, background: 'white', border: '2px solid #08A83A' };
+    const dangerCard = {borderRadius: 5, background: 'white', border: '2px solid #A80300'};
+
+    const deudaCard = [
+        {
+            span: 10,
+            title: 'Pagos pendientes',
+            content: 10
+        },
+        {
+            span: 11,
+            title: 'Cantidad pendiente',
+            content: '$25,200'
+        },
+    ]
+
+    const pagoCard = [
+        {
+            title: 'Deudas activas',
+            content: 64,
+            style: successCard
+        },
+        {
+            title: 'Deudas atrasadas',
+            content: 14,
+            style: dangerCard
+        },
+        {
+            title: 'Total invertido',
+            content: '$125,000',
+            style: successCard
+        },
+    ]
+
+    const clienteCard = [
+        {
+            span: 10,
+            title: 'Clientes activos',
+            content: 14,
+            style: successCard
+        },
+        {
+            span: 11,
+            title: 'Clientes inactivos',
+            content: 6,
+            style: dangerCard
+        }
+    ]
 
     return (
         <Fragment>
             <Row gutter={[16, 16]}>
-                <Col span={10}>
-                    <Card title="Pagos pendientes" bordered={false}>
-                        <Title level={3}>10</Title>
-                    </Card>
-                </Col>
-                <Col span={11}>
-                    <Card title="Cantidad pendiente" bordered={false}>
-                        <Title level={3}>$20,000</Title>
-                    </Card>
-                </Col>
+                {deudaCard.map((deuda, index) => (
+                    <Col key={index} span={deuda.span}>
+                        <Card title={deuda.title} bordered={false} style={warningCard}>
+                            <Title level={3}>{deuda.content}</Title>
+                        </Card>
+                    </Col>
+
+                ))}
                 <Col span={3}>
                     <Row justify="end">
                         <Col>
                             <Tooltip title="Ir a pagos" placement="top">
-                                <Avatar shape="square" style={avatarStyle} icon={<FontAwesomeIcon icon={faExternalLinkAlt} />} />
+                                <Button type="link" icon={<FontAwesomeIcon icon={faExternalLinkAlt} />} />
                             </Tooltip>
                         </Col>
                     </Row>
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
-                <Col span={7}>
-                    <Card title="Deudas Activas" bordered={false}>
-                        <Title level={3}>64</Title>
-                    </Card>
-                </Col>
-                <Col span={7}>
-                    <Card title="Deudas Atrasadas" bordered={false}>
-                        <Title level={3}>14</Title>
-                    </Card>
-                </Col>
-                <Col span={7}>
-                    <Card title="Total Invertido" bordered={false}>
-                        <Title level={3}>$150,000</Title>
-                    </Card>
-                </Col>
+                {pagoCard.map((pago, index) => (
+                    <Col key={index} span={7}>
+                        <Card title={pago.title} style={pago.style} bordered={false}>
+                            <Title level={3}>{pago.content}</Title>
+                        </Card>
+                    </Col>
+
+                ))}
                 <Col span={3}>
                     <Row justify="end">
                         <Col>
                             <Tooltip title="Ir a deudas" placement="top">
-                                <Avatar shape="square" style={avatarStyle} icon={<FontAwesomeIcon icon={faExternalLinkAlt} />} />
+                                <Button type="link" icon={<FontAwesomeIcon icon={faExternalLinkAlt} />} />
                             </Tooltip>
                         </Col>
                     </Row>
                 </Col>
             </Row>
             <Row gutter={16}>
-                <Col span={10}>
-                    <Card title="Clientes Activos" bordered={false}>
-                        <Title level={3}>14</Title>
-                    </Card>
-                </Col>
-                <Col span={11}>
-                    <Card title="Clientes Inactivos" bordered={false}>
-                        <Title level={3}>6</Title>
-                    </Card>
-                </Col>
+                {clienteCard.map((cliente, index) => (
+                    <Col span={cliente.span}>
+                        <Card title={cliente.title} style={cliente.style} bordered={false}>
+                            <Title level={3}>{cliente.content}</Title>
+                        </Card>
+                    </Col>
+                ))}
                 <Col span={3}>
                     <Row justify="end">
                         <Col>
                             <Tooltip title="Ir a clientes" placement="top">
-                                <Avatar shape="square" style={avatarStyle} icon={<FontAwesomeIcon icon={faExternalLinkAlt} />} />
+                                <Button type="link" icon={<FontAwesomeIcon icon={faExternalLinkAlt} />} />
                             </Tooltip>
                         </Col>
                     </Row>

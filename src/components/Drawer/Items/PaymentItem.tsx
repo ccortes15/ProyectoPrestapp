@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import { Form, Col, Row, Input, Select, DatePicker } from 'antd';
+import React, { ChangeEvent, Fragment, useState } from 'react'
+import { Form, Col, Row, Input, Select, DatePicker, InputNumber } from 'antd';
 
 const { Option } = Select;
 
@@ -7,100 +7,119 @@ interface Props {
 
 }
 
+const listaInfClientes = [
+    {
+        id: 1,
+        nombre: "Robert Velasco",
+        telefono: 3121451244,
+        correo: "robertoantonio_velasco@ucol.mx",
+        deuda: "deuda pendiente A"
+    },
+    {
+        id: 2,
+        nombre: "Adrian Cortes",
+        telefono: 3121457874,
+        correo: "ccortes15@ucol.mx",
+        deuda: "deuda pendiente B"
+
+    },
+    {
+        id: 3,
+        nombre: "Miguel Rodriguez",
+        telefono: 3141547855,
+        correo: "miguelantonio_rodriguez@ucol.mx",
+        deuda: "deuda pendiente C"
+
+    }
+]
+
 const PaymentItem: React.FC<Props> = () => {
+
+    const [ cliente, setCliente ] = useState<string>("")
+    const [ deuda, setDeuda ] = useState<string>("")
+    const [ total, setTotal ] = useState<number>()
+    const [ descripcion, setDescripcion ] = useState<ChangeEvent<HTMLTextAreaElement>>()
+
         return (
             <Fragment>
                 <Form layout="vertical" hideRequiredMark>
+                <Row gutter={16}>
+                        <Col span={12}>
+                            <h3
+                                style = {{
+                                    marginBottom: "20px"
+
+                            }} >Datos del pago</h3>
+                        </Col>
+                    </Row>
                     <Row gutter={16}>
                         <Col span={12}>
-                        <Form.Item
-                            name="name"
-                            label="Name"
-                            rules={[{ required: true, message: 'Please enter user name' }]}
-                        >
-                            <Input placeholder="Please enter user name" />
-                        </Form.Item>
+                            <Form.Item
+                                name="cliente"
+                                label="Elige cliente"
+                                rules={[{ required: true, message: 'Elige al cliente' }]}
+                            >
+                                <Select
+                                    onChange={(value: string) => setCliente(value)}
+                                    placeholder="Seleccione un cliente"
+                                    allowClear
+                                    >
+                                        {listaInfClientes.map((cliente, index) => (
+                                            <Option key={index} value = {cliente.nombre} >{cliente.nombre}</Option>
+                                        ))}
+                                </Select>                       
+                            </Form.Item>
                         </Col>
                         <Col span={12}>
                         <Form.Item
-                            name="url"
-                            label="Url"
-                            rules={[{ required: true, message: 'Please enter url' }]}
+                            name="deuda"
+                            label="Elige deuda"
+                            rules={[{ required: true, message: 'Elige la deuda del cliente' }]}
                         >
-                            <Input
-                            style={{ width: '100%' }}
-                            addonBefore="http://"
-                            addonAfter=".com"
-                            placeholder="Please enter url"
-                            />
+                            <Select
+                                    onChange={(value: string) => setDeuda(value)}
+                                    placeholder="Seleccione deuda respectiva"
+                                    allowClear
+                                    >
+                                        {listaInfClientes.map((cliente, index) => (
+                                            <Option key={index} value = {cliente.deuda} >{cliente.deuda}</Option>
+                                        ))}
+                                </Select> 
                         </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={16}>
                         <Col span={12}>
-                        <Form.Item
-                            name="owner"
-                            label="Owner"
-                            rules={[{ required: true, message: 'Please select an owner' }]}
-                        >
-                            <Select placeholder="Please select an owner">
-                            <Option value="xiao">Xiaoxiao Fu</Option>
-                            <Option value="mao">Maomao Zhou</Option>
-                            </Select>
-                        </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                        <Form.Item
-                            name="type"
-                            label="Type"
-                            rules={[{ required: true, message: 'Please choose the type' }]}
-                        >
-                            <Select placeholder="Please choose the type">
-                            <Option value="private">Private</Option>
-                            <Option value="public">Public</Option>
-                            </Select>
-                        </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
-                        <Col span={12}>
-                        <Form.Item
-                            name="approver"
-                            label="Approver"
-                            rules={[{ required: true, message: 'Please choose the approver' }]}
-                        >
-                            <Select placeholder="Please choose the approver">
-                            <Option value="jack">Jack Ma</Option>
-                            <Option value="tom">Tom Liu</Option>
-                            </Select>
-                        </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                        <Form.Item
-                            name="dateTime"
-                            label="DateTime"
-                            rules={[{ required: true, message: 'Please choose the dateTime' }]}
-                        >
-                            <DatePicker.RangePicker
-                            style={{ width: '100%' }}
-                            getPopupContainer={trigger => trigger.parentElement}
-                            />
-                        </Form.Item>
+                            <Form.Item
+                                name="cantidadPago"
+                                label="Cantidad del pago"
+                                rules={[{ required: true, message: 'Por favor ingresa la cantidad a pagar' }]}
+                            >
+                                <InputNumber
+                                    style={{ width: '100%' }}
+                                    onChange={(value: number) => setTotal(value)}
+                                    placeholder="Ingresa cantidad a pagar"
+                                />                     
+                            </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={16}>
                         <Col span={24}>
                         <Form.Item
                             name="description"
-                            label="Description"
+                            label="Descripción"
                             rules={[
                             {
                                 required: true,
-                                message: 'please enter url description',
+                                message: 'Ingresa una descrión o comentario del pago',
                             },
                             ]}
                         >
-                            <Input.TextArea rows={4} placeholder="please enter url description" />
+                            <Input.TextArea 
+                                rows={4} 
+                                placeholder="please enter url description"
+                                onChange={ (value: ChangeEvent<HTMLTextAreaElement>) => setDescripcion(value) }
+                            />
                         </Form.Item>
                         </Col>
                     </Row>
