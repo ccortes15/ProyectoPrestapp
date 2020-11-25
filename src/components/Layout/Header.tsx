@@ -1,5 +1,5 @@
 import { Menu, Row, Col } from 'antd';
-import { PlusOutlined, NotificationOutlined, UserOutlined, UserAddOutlined, SettingOutlined, LogoutOutlined, HistoryOutlined } from '@ant-design/icons';
+import { PlusOutlined, NotificationOutlined, UserOutlined, UserAddOutlined, SettingOutlined, LogoutOutlined, HistoryOutlined, SearchOutlined } from '@ant-design/icons';
 import { Fragment, FC } from 'react';
 
 const {SubMenu} = Menu;
@@ -15,6 +15,7 @@ const Header: FC = () => {
                     <Row justify="end">
                         <Col>
                             <Menu theme="light" mode="horizontal" style={{ float: 'right' }}>
+                                <Menu.Item key="search" icon={<SearchOutlined/>} />
                                 <SubMenu title="Agregar" key="add" icon={<PlusOutlined />}>
                                     <Menu.Item key="addDebt" icon={<PlusOutlined />}>
                                         Agregar deuda

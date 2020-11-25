@@ -2,13 +2,14 @@ import { Row, Col, Card, Typography, Tooltip, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { Fragment, FC } from 'react';
+import Link from 'next/link';
 
 const { Title } = Typography;
 
 const DashboardCards: FC = () => {
     const warningCard = { borderRadius: 5, background: 'white', border: '2px solid #F5EF40' };
     const successCard = { borderRadius: 5, background: 'white', border: '2px solid #08A83A' };
-    const dangerCard = {borderRadius: 5, background: 'white', border: '2px solid #A80300'};
+    const dangerCard = { borderRadius: 5, background: 'white', border: '2px solid #A80300' };
 
     const deudaCard = [
         {
@@ -59,6 +60,19 @@ const DashboardCards: FC = () => {
     return (
         <Fragment>
             <Row gutter={[16, 16]}>
+                <Col span={24}>
+                    <Row justify="end">
+                        <Col>
+                            <Link href={`/Dashboard/proyecciones/${'1'}`} >
+                                <Button type="dashed" icon={<FontAwesomeIcon icon={faExternalLinkAlt} style={{ marginRight: 4 }} />} >
+                                    Ir a proyecciones
+                                </Button>
+                            </Link>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+            <Row gutter={[16, 16]}>
                 {deudaCard.map((deuda, index) => (
                     <Col key={index} span={deuda.span}>
                         <Card title={deuda.title} bordered={false} style={warningCard}>
@@ -96,7 +110,7 @@ const DashboardCards: FC = () => {
                     </Row>
                 </Col>
             </Row>
-            <Row gutter={16}>
+            <Row gutter={[16, 16]}>
                 {clienteCard.map((cliente, index) => (
                     <Col span={cliente.span}>
                         <Card title={cliente.title} style={cliente.style} bordered={false}>
