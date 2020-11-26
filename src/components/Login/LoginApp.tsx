@@ -12,7 +12,7 @@ const Login: FC = () => {
     width: '350px',
     height: '100%',
     margin: 'auto',
-    marginTop: '5%',
+    marginTop: '1%',
     background: '#FFFFFF',
     border: '1px solid #000000',
     boxSizing: 'border-box',

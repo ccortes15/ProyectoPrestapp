@@ -1,6 +1,7 @@
 import { Layout, Breadcrumb } from 'antd';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Fragment, FC, useState } from 'react';
+import { sidebarStyle, contentStyle } from './styles/Style';
 import HeaderContent from './Header';
 import SidebarContent from './Sidebar';
 
@@ -12,21 +13,23 @@ const Login: FC = (props) => {
     return (
         <Fragment>
             <Layout>
-                <Sider style={{ background: 'white' }} theme="light" width={150} collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)} >
+                <Sider
+                    theme="light"
+                    style={sidebarStyle}
+                    width={150}
+                    collapsible
+                    collapsed={collapsed}
+                    onCollapse={() => setCollapsed(!collapsed)} >
                     <SidebarContent />
                 </Sider>
 
-                <Layout>
+                <Layout style={{marginLeft: collapsed ? 80 : 150, transition: 'all 0.2s ease '}}>
                     <Header style={{ background: 'white' }} className="header">
                         <HeaderContent />
                     </Header>
                     <Content
                         className="site-layout-background"
-                        style={{
-                            padding: 24,
-                            margin: 0,
-                            minHeight: 280,
-                        }}
+                        style={contentStyle}
                     >
                         <Breadcrumb>
                             <Breadcrumb.Item href="">
