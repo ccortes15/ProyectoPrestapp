@@ -1,18 +1,31 @@
 import { FC, Fragment, ReactElement, useState } from 'react';
-import { Collapse, Row, Col, Checkbox, Radio, Tag } from 'antd';
-import { RadioChangeEvent } from 'antd/lib/radio';
+import { Collapse, Row, Col, Checkbox, Tag, Select } from 'antd';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
-import { collapseStyle, radioStyle } from '../styles/Styles';
+import { collapseStyle } from '../styles/Styles';
 
 const { Panel } = Collapse;
+const { Option} = Select;
 
 const ProyeccionesSidebar: FC = () => {
-    const [radioValue, setRadio] = useState<string>('1');
+    const [selectValue, setSelect] = useState<string>('1');
+    const [checkValue, setCheck] = useState<CheckboxValueType[]>([]);
 
     type Filtros = {
         tag: string;
         color: string
     }
+
+    type OptionType = {
+        value: string;
+        label: string;
+    };
+
+    const options: OptionType[] = [
+        { value: "ordenAZ", label: "De A - Z" },
+        { value: "ordenZA", label: "De Z - A" },
+        { value: "mayorMenor", label: "Mayor a menor" },
+        { value: "menorMayor", label: "Menor a mayor" },
+    ];
 
     const filtros: Filtros[] = [
         { tag: 'ropa', color: 'red' },
@@ -21,10 +34,14 @@ const ProyeccionesSidebar: FC = () => {
         { tag: 'efectivo', color: 'magenta' }
     ]
 
-    const onChange = (value: string): void => {
-        setRadio(value);
-    };
+    const selectChange = (value: string): void => {
+        setSelect(value);
+    }
 
+    const checkChange = (value: CheckboxValueType[]): void => {
+        setCheck(value)
+    }
+    
     const capitalizeTag = (tag: string): string => {
         const fLetter = tag.substring(0, 1).toUpperCase();
         return fLetter + tag.substr(1)
@@ -38,23 +55,14 @@ const ProyeccionesSidebar: FC = () => {
                 expandIconPosition={'right'}
             >
                 <Panel header="Organizar" key="1" >
-                    <Radio.Group onChange={(e: RadioChangeEvent): any => onChange(e.target.value)} value={radioValue} >
-                        <Radio style={radioStyle} value={'1'}>
-                            Título (A - Z)
-                                    </Radio>
-                        <Radio style={radioStyle} value={'2'}>
-                            Título (Z - A)
-                                    </Radio>
-                        <Radio style={radioStyle} value={'3'}>
-                            Menor a mayor ($ - $$$)
-                                    </Radio>
-                        <Radio style={radioStyle} value={'4'}>
-                            Mayor a menor ($$$ - $)
-                                    </Radio>
-                    </Radio.Group>
+                    <Select style={{ width: '100%' }} placeholder="Organizar por:" onChange={selectChange} allowClear>
+                        {options.map((opt: OptionType, i: number) => (
+                            <Option key={i} value={opt.value}>{opt.label}</Option>
+                        ))}
+                    </Select>
                 </Panel>
                 <Panel header="Filtros" key="2" >
-                    <Checkbox.Group style={{ width: '100%' }} onChange={(checkedValue: CheckboxValueType[]): void => console.log(checkedValue)}>
+                    <Checkbox.Group style={{ width: '100%' }} onChange={(checkedValue: CheckboxValueType[]): void => checkChange(checkedValue)}>
                         <Row>
                             {filtros.map((filtro: Filtros, i: number): ReactElement => (
                                 <Col key={i} span={24}>
