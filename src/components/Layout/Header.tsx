@@ -24,7 +24,9 @@ const Header: FC = () => {
                                 <Menu.Item key="search" icon={<SearchOutlined/>} />
                                 <SubMenu title="Agregar" key="add" icon={<PlusOutlined />}>
                                     <Menu.Item key="addDebt" icon={<PlusOutlined />}>
-                                        Agregar deuda
+                                        <FormContainer transcType = {"deuda"} ao={"a"} >
+                                            <DebtItem/>
+                                        </FormContainer>
                                     </Menu.Item>
                                     <Menu.Item key="addPay" icon={<FontAwesomeIcon style={{marginRight:"15px"}} icon = {faDollarSign}/>}>
                                         <FormContainer transcType = {"pago"} ao = {"o"}>

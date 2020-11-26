@@ -3,6 +3,8 @@ import { Form, Col, Row, Input, Select, DatePicker, Button, InputNumber } from '
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import TextArea from 'antd/lib/input/TextArea';
+import FormContainer from '../FormContainer';
+import ClientItem from './ClientItem';
 
 const { Option } = Select;
 
@@ -80,22 +82,9 @@ const DebtItem: React.FC<Props> = () => {
                                         ))}
                                 </Select>
                                 <Col style = {{display: "flex", flexDirection: "row-reverse"}}>
-                                    <Button 
-                                        style = {{
-                                            display: "flex", 
-                                            alignItems: "center",
-                                            justifyContent: "center", 
-                                            marginTop: "5px", 
-                                            width: "90px", 
-                                            height: "20px", 
-                                            fontSize: "10px",
-                                            flexDirection: "row",
-                                        }} 
-                                        type = "ghost"
-                                    >
-                                        <FontAwesomeIcon icon = {faPlus}/>
-                                          Nuevo cliente
-                                    </Button>
+                                    <FormContainer transcType={"cliente"} ao={"o"} >
+                                        <ClientItem/>
+                                    </FormContainer>
                                 </Col>
                             </Form.Item>
                         </Col>
