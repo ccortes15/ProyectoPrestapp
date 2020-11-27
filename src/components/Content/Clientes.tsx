@@ -5,7 +5,7 @@ import MenuSidebar from './sidebar/MenuSidebar';
 import FiltrosDeuda from './sidebar/items/FiltrosDeuda';
 import ContentList from './list/ContentList';
 
-const Deudas: FC = () => {
+const Clientes: FC = () => {
     const [searchValue, setSearch] = useState<string>('texto de prueba');
 
     const onSearch = (value: string): void => {
@@ -33,4 +33,4 @@ const Deudas: FC = () => {
     )
 }
 
-export default Deudas;
+export default Clientes;

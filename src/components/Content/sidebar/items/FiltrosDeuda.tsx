@@ -1,13 +1,14 @@
-import { Form, Button, DatePicker, Select, InputNumber, Divider, Checkbox, Badge } from 'antd';
-import { FC } from 'react';
+import { Form, Button, DatePicker, Select, Divider, Checkbox, Badge } from 'antd';
+import { FC, useState } from 'react';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
+import SliderItems from './SliderItems';
 
-
-const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 const FiltrosDeuda: FC = () => {
     const [form] = Form.useForm();
+    const [minSlider] = useState<number>(5000);
+    const [maxSlider] = useState<number>(25000);
 
     type OptionSelectType = {
         value: string;
@@ -46,19 +47,35 @@ const FiltrosDeuda: FC = () => {
         return options
     }
 
+    const capitalizeTag = (tag: string): string => {
+        const fLetter = tag.substring(0, 1).toUpperCase();
+        return fLetter + tag.substr(1)
+    }
+
+    const capitalizeName = (name: string): string => {
+        const names = name.split(' ');
+        let result = '';
+        for(let n of names){
+            result = result + capitalizeTag(n) + ' '
+        }
+        return result
+    }
+
     return (
         <Form
             layout="vertical"
             form={form}
+            initialValues={{
+                cantidad: {
+                    slider: [minSlider, maxSlider]
+                }
+            }}
         >
-            <Form.Item label="Fecha">
-                <RangePicker placeholder={['Inicio', 'Fin']} />
-            </Form.Item>
-            <Form.Item label="Estatutos">
+            <Form.Item name="estatutos" label="Estatutos">
                 <Select
                     style={{ width: '100%' }}
                     showSearch
-                    placeholder="Estatutos:"
+                    placeholder="Seleccionar:"
                     optionFilterProp="value"
                     filterOption={(inputValue, option) =>
                         option.value.toLowerCase().indexOf(inputValue.toLowerCase()) >= 0
@@ -66,20 +83,26 @@ const FiltrosDeuda: FC = () => {
                     allowClear
                 >
                     {getOptions(estatutoList).map((opt: OptionSelectType, i: number) => (
-                        <Option key={i} value={opt.value}>{opt.label}</Option>
+                        <Option key={i} value={opt.value}>{capitalizeTag(opt.label)}</Option>
                     ))}
                 </Select>
             </Form.Item>
-            <Form.Item label="Cantidad">
-                <InputNumber
-                    min={0}
-                    defaultValue={0}
-                    formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                    onChange={(value) => console.log(value)}
-                />
+
+            <Divider plain>
+                Periodo
+            </Divider>
+            <Form.Item name="fechaInicio" label="Fecha inicio">
+                <DatePicker format="DD/MM/YYYY" placeholder="Seleccionar fecha" />
             </Form.Item>
-            <Form.Item label="Cliente deudor">
+            <Form.Item name="fechaFin" label="Fecha fin">
+                <DatePicker format="DD/MM/YYYY" placeholder="Seleccionar fecha" />
+            </Form.Item>
+
+            <Divider plain>
+                Deuda
+            </Divider>
+
+            <Form.Item name="cliente" label="Cliente deudor">
                 <Select
                     style={{ width: '100%' }}
                     showSearch
@@ -91,11 +114,16 @@ const FiltrosDeuda: FC = () => {
                     allowClear
                 >
                     {getOptions(clienteList).map((opt: OptionSelectType, i: number) => (
-                        <Option key={i} value={opt.value}>{opt.label}</Option>
+                        <Option key={i} value={opt.value}>{capitalizeName(opt.label)}</Option>
                     ))}
                 </Select>
             </Form.Item>
-            <Form.Item label="Frecuencia de pago">
+
+            <Form.Item name="cantidad" label="Cantidad">
+                <SliderItems />
+            </Form.Item>
+
+            <Form.Item name="frecuenciaPago" label="Frecuencia de pago">
                 <Select
                     style={{ width: '100%' }}
                     showSearch
@@ -107,14 +135,16 @@ const FiltrosDeuda: FC = () => {
                     allowClear
                 >
                     {getOptions(frecuenciaList).map((opt: OptionSelectType, i: number) => (
-                        <Option key={i} value={opt.value}>{opt.label}</Option>
+                        <Option key={i} value={opt.value}>{capitalizeTag(opt.label)}</Option>
                     ))}
                 </Select>
             </Form.Item>
+
             <Divider plain>
                 Etiquetas
             </Divider>
-            <Form.Item label="Nombre de etiqueta">
+
+            <Form.Item name="nombreEtiqueta" label="Nombre de etiqueta">
                 <Select
                     style={{ width: '100%' }}
                     showSearch
@@ -126,15 +156,16 @@ const FiltrosDeuda: FC = () => {
                     allowClear
                 >
                     {getEtiqueta(etiquetaList, 'name').map((opt: OptionSelectType, i: number) => (
-                        <Option key={i} value={opt.value}>{opt.label}</Option>
+                        <Option key={i} value={opt.value}>{capitalizeTag(opt.label)}</Option>
                     ))}
                 </Select>
             </Form.Item>
-            <Form.Item label="Color de etiqueta">
+
+            <Form.Item name="colorEtiqueta" label="Color de etiqueta">
                 <Checkbox.Group style={{ width: '100%' }} onChange={(checkedValue: CheckboxValueType[]): void => console.log(checkedValue)}>
                     {getEtiqueta(etiquetaList, 'color').map((opt: OptionSelectType, i: number) => (
                         <div key={i}>
-                            <Checkbox  value={opt.value}>
+                            <Checkbox value={opt.value}>
                                 <Badge color={opt.label} />
                             </Checkbox>
                         </div>
@@ -142,6 +173,7 @@ const FiltrosDeuda: FC = () => {
                     ))}
                 </Checkbox.Group>
             </Form.Item>
+
             <Form.Item>
                 <Button type="primary" block>Filtrar datos</Button>
             </Form.Item>

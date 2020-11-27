@@ -1,7 +1,8 @@
 import { Input, Row, Col } from 'antd';
 import { ChangeEvent, FC, Fragment, useState } from 'react';
 import { inputStyle } from './styles/Styles';
-import MenuProyecciones from './sidebar/MenuProyeccion';
+import MenuSidebar from './sidebar/MenuSidebar';
+import FiltrosProye from './sidebar/items/FiltrosProye';
 import ListProyecciones from './list/ContentList';
 
 const Proyecciones: FC = () => {
@@ -17,7 +18,9 @@ const Proyecciones: FC = () => {
         <Fragment>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                 <Col span={5}>
-                    <MenuProyecciones />
+                    <MenuSidebar>
+                        <FiltrosProye />
+                    </MenuSidebar>
                 </Col>
                 <Col span={19}>
                     <Input 

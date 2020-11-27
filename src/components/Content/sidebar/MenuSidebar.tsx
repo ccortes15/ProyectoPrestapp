@@ -1,12 +1,11 @@
 import { FC, Fragment } from 'react';
 import { Collapse, Select } from 'antd';
 import { collapseStyle } from '../styles/Styles';
-import FiltrosDeuda from './items/FiltrosDeuda';
 
 const { Panel } = Collapse;
 const { Option } = Select;
 
-const MenuDeudas: FC = () => {
+const MenuSidebar: FC = ({children}) => {
     type OptionType = {
         value: string;
         label: string;
@@ -34,11 +33,11 @@ const MenuDeudas: FC = () => {
                     </Select>
                 </Panel>
                 <Panel header="Filtros" key="2" >
-                    <FiltrosDeuda />
+                    {children}
                 </Panel>
             </Collapse>
         </Fragment>
     )
 }
 
-export default MenuDeudas;
+export default MenuSidebar;

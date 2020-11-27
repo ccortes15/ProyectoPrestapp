@@ -10,24 +10,25 @@ const Sidebar: FC = () => {
     <Fragment>
       <Menu theme="light" mode="inline">
         <Menu.Item key="dashboard" icon={<FundProjectionScreenOutlined />} >
-          Dashboard
-                </Menu.Item>
-        <Menu.Item key="aDeuda" icon={<Link href={`/Deudas/${'1'}`} >
-            <CreditCardOutlined />
-        </Link>
-        } >
-          <Link href={`/Deudas/${'1'}`} >
-            <Button type="link" >
-              Deudas
-              </Button>
+          <Link href={'/Dashboard/inicio'} >
+            <a href="#!" >Dashboard</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="aPago" icon={<DollarOutlined />}>
-          Pagos
-              </Menu.Item>
-        <Menu.Item key="aCliente" icon={<TeamOutlined />}>
-          Clientes
-              </Menu.Item>
+        <Menu.Item key="deuda" icon={<CreditCardOutlined />}>
+          <Link href={`/Dashboard/Deudas/${'1'}`} >
+            <a href="#!" >Deudas</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="pago" icon={<DollarOutlined />}>
+          <Link href={`/Dashboard/Pagos/${'1'}`} >
+            <a href="#!" >Pagos</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="cliente" icon={<TeamOutlined />}>
+          <Link href={`/Dashboard/Clientes/${'1'}`} >
+            <a href="#!" >Clientes</a>
+          </Link>
+        </Menu.Item>
         <SubMenu key="sub3" title="Opciones" icon={<SettingOutlined />} >
           <Menu.Item key="oAyuda">Ayuda</Menu.Item>
           <Menu.Item key="oError">Reportar error</Menu.Item>

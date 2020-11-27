@@ -8,7 +8,7 @@ import SidebarContent from './Sidebar';
 const { Header, Content, Sider } = Layout;
 
 const Login: FC = (props) => {
-    const [collapsed, setCollapsed] = useState(false)
+    const [collapsed, setCollapsed] = useState(true)
 
     return (
         <Fragment>
