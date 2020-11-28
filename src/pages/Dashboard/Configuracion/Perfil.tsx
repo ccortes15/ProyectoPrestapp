@@ -1,20 +1,16 @@
 import React, { FC } from 'react'
 import 'antd/dist/antd.css';
-import Perfil from '../../../components/Content/Config/Perfil'
+import ConfPerfil from '../../../components/Content/Config/ConfPerfil'
 import LayoutAdmin from '../../../components/Layout/LayoutAdmin'
 
-type Props = {
-
-}
-
-const ConfPerfil: FC<Props> = () => {
+const Perfil: FC = () => {
 
         return (
             <LayoutAdmin>
-                <Perfil/>
+                <ConfPerfil/>
             </LayoutAdmin>
         ) 
 
 }
 
-export default ConfPerfil
+export default Perfil
