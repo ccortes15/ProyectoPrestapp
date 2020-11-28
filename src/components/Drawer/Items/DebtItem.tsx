@@ -1,7 +1,5 @@
 import React, { Fragment, useState, ChangeEvent } from 'react'
 import { Form, Col, Row, Input, Select, DatePicker, Button, InputNumber } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import TextArea from 'antd/lib/input/TextArea';
 import FormContainer from '../FormContainer';
 import ClientItem from './ClientItem';
