@@ -4,8 +4,11 @@ import { collapseStyle } from '../styles/Styles';
 
 const { Panel } = Collapse;
 const { Option } = Select;
+interface MenuProps {
+    isCliente?: Boolean;
+}
 
-const MenuSidebar: FC = ({children}) => {
+const MenuSidebar: FC<MenuProps> = ({children, isCliente}) => {
     type OptionType = {
         value: string;
         label: string;
@@ -32,9 +35,11 @@ const MenuSidebar: FC = ({children}) => {
                         ))}
                     </Select>
                 </Panel>
-                <Panel header="Filtros" key="2" >
+                {isCliente ? null 
+                : <Panel header="Filtros" key="2" >
                     {children}
-                </Panel>
+                </Panel>}
+                
             </Collapse>
         </Fragment>
     )

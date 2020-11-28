@@ -2,7 +2,6 @@ import { Input, Row, Col } from 'antd';
 import { ChangeEvent, FC, Fragment, useState } from 'react';
 import { inputStyle } from './styles/Styles';
 import MenuSidebar from './sidebar/MenuSidebar';
-import FiltrosDeuda from './sidebar/items/FiltrosDeuda';
 import ContentList from './list/ContentList';
 
 const Clientes: FC = () => {
@@ -16,14 +15,12 @@ const Clientes: FC = () => {
         <Fragment>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                 <Col span={5}>
-                    <MenuSidebar>
-                        <FiltrosDeuda />
-                    </MenuSidebar>
+                    <MenuSidebar isCliente />
                 </Col>
                 <Col span={19}>
                     <Input 
                         style={inputStyle}
-                        placeholder="Buscar deuda"
+                        placeholder="Buscar cliente por: (Nombre, Teléfono, Correo, Domicilio)"
                         id="1"
                         onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
                     <ContentList />

@@ -1,25 +1,28 @@
-import { Form, Button, DatePicker, Select, Divider, Checkbox, Badge } from 'antd';
-import { FC, useState } from 'react';
+import { Form, DatePicker, Select, Divider, Checkbox, Badge } from 'antd';
+import { FC, Fragment } from "react";
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import SliderItems from './SliderItems';
 
 const { Option } = Select;
 
-const FiltrosDeuda: FC = () => {
-    const [form] = Form.useForm();
-    const [minSlider] = useState<number>(5000);
-    const [maxSlider] = useState<number>(25000);
+interface FiltrosProps {
+    isPago?: Boolean;
+}
 
-    type OptionSelectType = {
-        value: string;
-        label: string;
-    };
+interface OptionsEtiqueta {
+    name: string;
+    color: string;
+}
 
-    type OptionsEtiqueta = {
-        name: string;
-        color: string;
-    }
+interface OptionSelectType {
+    value: string;
+    label: string;
+};
 
+const FormItems: FC<FiltrosProps> = ({isPago}) => {
+    let inputValue: 'estatuto' | 'estatus' = isPago ? 'estatus' : 'estatuto';
+
+    const estatusList: string[] = ['activo', 'inactivo', 'pendiente'];
     const estatutoList: string[] = ['estatuto1', 'estatuto2', 'estatuto3'];
     const frecuenciaList: string[] = ['semanal', 'quincenal', 'mensual'];
     const clienteList: string[] = ['miguel rodriguez', 'roberto antonio', 'adrian cortés'];
@@ -47,31 +50,24 @@ const FiltrosDeuda: FC = () => {
         return options
     }
 
-    const capitalizeTag = (tag: string): string => {
-        const fLetter = tag.substring(0, 1).toUpperCase();
-        return fLetter + tag.substr(1)
-    }
-
     const capitalizeName = (name: string): string => {
         const names = name.split(' ');
         let result = '';
-        for(let n of names){
+
+        const capitalizeTag = (tag: string): string => {
+            const fLetter = tag.substring(0, 1).toUpperCase();
+            return fLetter + tag.substr(1)
+        }
+
+        for (let n of names) {
             result = result + capitalizeTag(n) + ' '
         }
         return result
     }
 
     return (
-        <Form
-            layout="vertical"
-            form={form}
-            initialValues={{
-                cantidad: {
-                    slider: [minSlider, maxSlider]
-                }
-            }}
-        >
-            <Form.Item name="estatutos" label="Estatutos">
+        <Fragment>
+            <Form.Item name={inputValue} label={capitalizeName(inputValue)}>
                 <Select
                     style={{ width: '100%' }}
                     showSearch
@@ -82,11 +78,12 @@ const FiltrosDeuda: FC = () => {
                     }
                     allowClear
                 >
-                    {getOptions(estatutoList).map((opt: OptionSelectType, i: number) => (
-                        <Option key={i} value={opt.value}>{capitalizeTag(opt.label)}</Option>
+                    {getOptions(isPago ? estatusList : estatutoList).map((opt: OptionSelectType, i: number) => (
+                        <Option key={i} value={opt.value}>{capitalizeName(opt.label)}</Option>
                     ))}
                 </Select>
             </Form.Item>
+
 
             <Divider plain>
                 Periodo
@@ -135,7 +132,7 @@ const FiltrosDeuda: FC = () => {
                     allowClear
                 >
                     {getOptions(frecuenciaList).map((opt: OptionSelectType, i: number) => (
-                        <Option key={i} value={opt.value}>{capitalizeTag(opt.label)}</Option>
+                        <Option key={i} value={opt.value}>{capitalizeName(opt.label)}</Option>
                     ))}
                 </Select>
             </Form.Item>
@@ -156,7 +153,7 @@ const FiltrosDeuda: FC = () => {
                     allowClear
                 >
                     {getEtiqueta(etiquetaList, 'name').map((opt: OptionSelectType, i: number) => (
-                        <Option key={i} value={opt.value}>{capitalizeTag(opt.label)}</Option>
+                        <Option key={i} value={opt.value}>{capitalizeName(opt.label)}</Option>
                     ))}
                 </Select>
             </Form.Item>
@@ -173,12 +170,8 @@ const FiltrosDeuda: FC = () => {
                     ))}
                 </Checkbox.Group>
             </Form.Item>
-
-            <Form.Item>
-                <Button type="primary" block>Filtrar datos</Button>
-            </Form.Item>
-        </Form>
+        </Fragment>
     )
 }
 
-export default FiltrosDeuda;
+export default FormItems;

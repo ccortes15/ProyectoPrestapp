@@ -2,7 +2,7 @@ import { Input, Row, Col } from 'antd';
 import { ChangeEvent, FC, Fragment, useState } from 'react';
 import { inputStyle } from './styles/Styles';
 import MenuSidebar from './sidebar/MenuSidebar';
-import FiltrosDeuda from './sidebar/items/FiltrosDeuda';
+import Filtros from './sidebar/items/Filtros';
 import ContentList from './list/ContentList';
 
 const Deudas: FC = () => {
@@ -17,7 +17,7 @@ const Deudas: FC = () => {
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                 <Col span={5}>
                     <MenuSidebar>
-                        <FiltrosDeuda />
+                        <Filtros />
                     </MenuSidebar>
                 </Col>
                 <Col span={19}>
