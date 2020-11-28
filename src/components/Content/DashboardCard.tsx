@@ -93,7 +93,7 @@ const DashboardCards: FC = () => {
             </Row>
             <Row gutter={[16, 16]}>
                 {pagoCard.map((pago, index) => (
-                    <Col key={index} span={7}>
+                    <Col key={index+index} span={7}>
                         <Card title={pago.title} style={pago.style} bordered={false}>
                             <Title level={3}>{pago.content}</Title>
                         </Card>
@@ -112,7 +112,7 @@ const DashboardCards: FC = () => {
             </Row>
             <Row gutter={[16, 16]}>
                 {clienteCard.map((cliente, index) => (
-                    <Col span={cliente.span}>
+                    <Col key={index+index+index} span={cliente.span}>
                         <Card title={cliente.title} style={cliente.style} bordered={false}>
                             <Title level={3}>{cliente.content}</Title>
                         </Card>

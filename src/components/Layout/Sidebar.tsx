@@ -1,33 +1,42 @@
-import { Menu } from 'antd';
+import { Menu, Button } from 'antd';
 import { FundProjectionScreenOutlined, DollarOutlined, TeamOutlined, CreditCardOutlined, SettingOutlined } from '@ant-design/icons';
 import { Fragment, FC } from 'react';
+import Link from 'next/link';
 
 const { SubMenu } = Menu;
 
 const Sidebar: FC = () => {
-    return(
-        <Fragment>
-            <Menu theme="light" mode="inline">
-              <Menu.Item key="dashboard" icon={<FundProjectionScreenOutlined />} >
-                Dashboard
-                </Menu.Item>
-              <Menu.Item key="aDeuda" icon={<CreditCardOutlined />} >
-                Deudas
-                </Menu.Item>
-              <Menu.Item key="aPago" icon={<DollarOutlined />}>
-                Pagos
-              </Menu.Item>
-              <Menu.Item key="aCliente" icon={<TeamOutlined />}>
-                Clientes
-              </Menu.Item>
-            <SubMenu key="sub3" title="Opciones" icon={<SettingOutlined />} >
-              <Menu.Item key="oAyuda">Ayuda</Menu.Item>
-              <Menu.Item key="oError">Reportar error</Menu.Item>
-              <Menu.Item key="oCliente">Clientes</Menu.Item>
-            </SubMenu>
-          </Menu>
-        </Fragment>
-    )
+  return (
+    <Fragment>
+      <Menu theme="light" mode="inline">
+        <Menu.Item key="dashboard" icon={<FundProjectionScreenOutlined />} >
+          <Link href={'/Dashboard/inicio'} >
+            <a href="#!" >Dashboard</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="deuda" icon={<CreditCardOutlined />}>
+          <Link href={`/Dashboard/Deudas/${'1'}`} >
+            <a href="#!" >Deudas</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="pago" icon={<DollarOutlined />}>
+          <Link href={`/Dashboard/Pagos/${'1'}`} >
+            <a href="#!" >Pagos</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="cliente" icon={<TeamOutlined />}>
+          <Link href={`/Dashboard/Clientes/${'1'}`} >
+            <a href="#!" >Clientes</a>
+          </Link>
+        </Menu.Item>
+        <SubMenu key="sub3" title="Opciones" icon={<SettingOutlined />} >
+          <Menu.Item key="oAyuda">Ayuda</Menu.Item>
+          <Menu.Item key="oError">Reportar error</Menu.Item>
+          <Menu.Item key="oCliente">Clientes</Menu.Item>
+        </SubMenu>
+      </Menu>
+    </Fragment>
+  )
 }
 
 export default Sidebar;

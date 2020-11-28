@@ -1,15 +1,23 @@
 import { Layout, Breadcrumb } from 'antd';
-import { HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined } from '@ant-design/icons';
 import { Fragment, FC, useState } from 'react';
 import { sidebarStyle, contentStyle } from './styles/Style';
 import HeaderContent from './Header';
 import SidebarContent from './Sidebar';
+import { useRouter } from 'next/router'
 
 const { Header, Content, Sider } = Layout;
 
 const Login: FC = (props) => {
-    const [collapsed, setCollapsed] = useState(false)
+    const [collapsed, setCollapsed] = useState(true)
+    const router = useRouter()
 
+    const getBread = (route: string): string[] => {
+        const bread = route.split("/")
+        bread.shift();
+        return bread;
+    }
+    console.log(getBread(router.asPath))
     return (
         <Fragment>
             <Layout>
@@ -23,7 +31,7 @@ const Login: FC = (props) => {
                     <SidebarContent />
                 </Sider>
 
-                <Layout style={{marginLeft: collapsed ? 80 : 150, transition: 'all 0.2s ease '}}>
+                <Layout style={{ marginLeft: collapsed ? 80 : 150, transition: 'all 0.2s ease ' }}>
                     <Header style={{ background: 'white' }} className="header">
                         <HeaderContent />
                     </Header>
@@ -31,15 +39,15 @@ const Login: FC = (props) => {
                         className="site-layout-background"
                         style={contentStyle}
                     >
-                        <Breadcrumb>
+                        <Breadcrumb separator=">">
                             <Breadcrumb.Item href="">
                                 <HomeOutlined />
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item href="">
-                                <UserOutlined />
-                                <span>Application List</span>
-                            </Breadcrumb.Item>
-                            <Breadcrumb.Item>Application</Breadcrumb.Item>
+                            {getBread(router.asPath).map((bread: string, i: number) => (
+                                <Breadcrumb.Item key={i} href="">
+                                    {bread}
+                                </Breadcrumb.Item>
+                            ))}
                         </Breadcrumb>
                         <div className="site-layout-background" style={{ padding: 20, minHeight: 360 }}>
                             {props.children}
