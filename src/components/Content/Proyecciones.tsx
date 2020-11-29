@@ -28,7 +28,6 @@ const Proyecciones: FC = () => {
                         placeholder="Buscar proyección"
                         id="1"
                         onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
-                    <ListProyecciones />
                 </Col>
             </Row>
         </Fragment >

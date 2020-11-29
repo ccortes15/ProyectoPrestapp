@@ -1,6 +1,7 @@
 import { Form, DatePicker, Select, Divider, Checkbox, Badge } from 'antd';
 import { FC, Fragment } from "react";
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
+import {capitalizeName} from '../../functions/Functions';
 import SliderItems from './SliderItems';
 
 const { Option } = Select;
@@ -48,21 +49,6 @@ const FormItems: FC<FiltrosProps> = ({isPago}) => {
             options.push({ value: value[type], label: value[type] });
         }
         return options
-    }
-
-    const capitalizeName = (name: string): string => {
-        const names = name.split(' ');
-        let result = '';
-
-        const capitalizeTag = (tag: string): string => {
-            const fLetter = tag.substring(0, 1).toUpperCase();
-            return fLetter + tag.substr(1)
-        }
-
-        for (let n of names) {
-            result = result + capitalizeTag(n) + ' '
-        }
-        return result
     }
 
     return (

@@ -10,6 +10,7 @@ const Clientes: FC = () => {
     const onSearch = (value: string): void => {
         setSearch(value)
     }
+    
 
     return (
         <Fragment>
@@ -23,7 +24,6 @@ const Clientes: FC = () => {
                         placeholder="Buscar cliente por: (Nombre, Teléfono, Correo, Domicilio)"
                         id="1"
                         onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
-                    <ContentList />
                 </Col>
             </Row>
         </Fragment >

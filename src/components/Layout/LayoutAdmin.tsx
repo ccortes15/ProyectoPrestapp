@@ -1,23 +1,37 @@
 import { Layout, Breadcrumb } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
+//import { HomeOutlined } from '@ant-design/icons';
 import { Fragment, FC, useState } from 'react';
 import { sidebarStyle, contentStyle } from './styles/Style';
 import HeaderContent from './Header';
 import SidebarContent from './Sidebar';
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 
 const { Header, Content, Sider } = Layout;
 
 const Login: FC = (props) => {
     const [collapsed, setCollapsed] = useState(true)
-    const router = useRouter()
+    // const router = useRouter()
+    // const path = router.asPath;
 
-    const getBread = (route: string): string[] => {
-        const bread = route.split("/")
-        bread.shift();
-        return bread;
-    }
-    console.log(getBread(router.asPath))
+    // const getBread = (route: string): string[] => {
+    //     const bread = route.split("/")
+    //     let values = [];
+    //     let ref = "/";
+
+    //     bread.shift();
+
+    //     for(let b of bread){
+    //         ref = ref + b + '/';
+
+    //         values.push({
+    //             bread: b,
+    //             ref: ref
+    //         })
+    //     }
+
+    //     return values;
+    // }
+
     return (
         <Fragment>
             <Layout>
@@ -40,14 +54,11 @@ const Login: FC = (props) => {
                         style={contentStyle}
                     >
                         <Breadcrumb separator=">">
-                            <Breadcrumb.Item href="">
-                                <HomeOutlined />
-                            </Breadcrumb.Item>
-                            {getBread(router.asPath).map((bread: string, i: number) => (
+                            {/* {getBread(path).map((bread: string, i: number) => (
                                 <Breadcrumb.Item key={i} href="">
                                     {bread}
                                 </Breadcrumb.Item>
-                            ))}
+                            ))} */}
                         </Breadcrumb>
                         <div className="site-layout-background" style={{ padding: 20, minHeight: 360 }}>
                             {props.children}

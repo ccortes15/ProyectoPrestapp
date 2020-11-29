@@ -1,6 +1,7 @@
 import { FC, Fragment, useState } from 'react';
 import { Row, Col, Checkbox, Tag } from 'antd';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
+import {capitalizeTag} from '../../functions/Functions';
 
 
 const FiltrosProye: FC = () => {
@@ -20,11 +21,6 @@ const FiltrosProye: FC = () => {
 
     const checkChange = (value: CheckboxValueType[]): void => {
         setCheck(value)
-    }
-    
-    const capitalizeTag = (tag: string): string => {
-        const fLetter = tag.substring(0, 1).toUpperCase();
-        return fLetter + tag.substr(1)
     }
 
     return (

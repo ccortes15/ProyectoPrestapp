@@ -5,8 +5,79 @@ import MenuSidebar from './sidebar/MenuSidebar';
 import Filtros from './sidebar/items/Filtros';
 import ContentList from './list/ContentList';
 
+interface Deudas {
+    debtor?: string;
+    title?: string;
+    description?: string;
+    totalAmount?: number;
+    estimateDueDate?: string;
+    paymentFrecuency?: string;
+    labels?: string[];
+}
+
+interface SendData {
+    label: string;
+    value: string;
+}
+
+interface DataToSend {
+    id: string;
+    data: SendData[];
+}
+
 const Deudas: FC = () => {
     const [searchValue, setSearch] = useState<string>('texto de prueba');
+    let count:number = 0;
+
+    const getDeudas = (): Deudas[] => {
+        const dataDeuda: Deudas[] = []
+        for (let i = 0; i < 20; i++) {
+            dataDeuda.push(
+                {
+                    debtor: `adrian ${i}`,
+                    title: `deuda ${i}`,
+                    description: 'deuda super chida',
+                    totalAmount: 25000,
+                    estimateDueDate: '08/01/2020',
+                    paymentFrecuency: 'semanal',
+                    labels: ['nice', 'nike', 'adidas']
+                }
+            )
+        }
+
+        return dataDeuda;
+    }
+
+    const dataToSend = (): DataToSend[] => {
+        const dataDeuda = getDeudas();
+        const values: DataToSend[] = []
+        for (let v of dataDeuda) {
+            values.push({
+                id: `${count++}`,
+                data: [
+                        {
+                            label: 'Nombre deudor',
+                            value: v.debtor
+                        },
+                        {
+                            label: 'Total de pagos ',
+                            value: v.totalAmount.toString()
+                        },
+                        {
+                            label: 'Estatus',
+                            value: v.estimateDueDate
+                        },
+                        {
+                            label: 'Cantidad total pagada',
+                            value: `$ ${v.totalAmount}`
+                        }
+                    ]
+                }
+            )
+        }
+
+        return values;
+    }
 
     const onSearch = (value: string): void => {
         setSearch(value)
@@ -21,12 +92,12 @@ const Deudas: FC = () => {
                     </MenuSidebar>
                 </Col>
                 <Col span={19}>
-                    <Input 
+                    <Input
                         style={inputStyle}
                         placeholder="Buscar deuda"
                         id="1"
                         onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
-                    <ContentList />
+                    <ContentList data={dataToSend()} typeContent="deuda" />
                 </Col>
             </Row>
         </Fragment >
