@@ -8,12 +8,12 @@ interface MenuProps {
     isCliente?: Boolean;
 }
 
-const MenuSidebar: FC<MenuProps> = ({children, isCliente}) => {
-    type OptionType = {
-        value: string;
-        label: string;
-    };
+interface OptionType {
+    value: string;
+    label: string;
+};
 
+const MenuSidebar: FC<MenuProps> = ({children, isCliente}) => {  
     const options: OptionType[] = [
         { value: "ordenAZ", label: "De A - Z" },
         { value: "ordenZA", label: "De Z - A" },

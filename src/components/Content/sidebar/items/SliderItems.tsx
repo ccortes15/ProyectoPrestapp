@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { Select, Slider, Row, Col, Tag } from 'antd';
+import {getFormat} from '../../functions/Functions';
 
 type Cantidad = {
     slider: [number, number];
@@ -15,10 +16,6 @@ const SliderItems: FC<InputProps> = ({ value = {}}) => {
     const [minInput, setMinInput] = useState<number>(5000);
     const [maxInput, setMaxInput] = useState<number>(25000);
     const [slider, setSlider] = useState<[number,number]>([minSlider, maxSlider]);
-
-    const getFormat = (value:number): string => {
-        return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    }
 
     const onAfterChange = (value: number[]): void => {
         setMinInput(value[0]);

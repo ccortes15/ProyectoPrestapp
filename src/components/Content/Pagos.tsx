@@ -26,7 +26,6 @@ const Pagos: FC = () => {
                         placeholder="Buscar pago"
                         id="1"
                         onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
-                    <ContentList />
                 </Col>
             </Row>
         </Fragment >
