@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Drawer, Button } from 'antd';
 
 
@@ -12,7 +12,7 @@ const DrawerContainer: React.FC<props> = (props) => {
     const [visibility, setVisibility] = useState<boolean>(false)
 
         return (
-            <>
+            <Fragment>
                 <Button type = "link" onClick = { () => setVisibility(true)} >
                     Nuev{props.ao} {props.transcType}
                 </Button>
@@ -35,14 +35,14 @@ const DrawerContainer: React.FC<props> = (props) => {
                             setVisibility(false)
                         }} 
                         style={{ marginRight: 8 }}>
-                        Cancel
+                        Cancelar
                     </Button>
                     <Button 
                         onClick={ () => {
                             setVisibility(false)
                         } } 
                         type="primary">
-                        Submit
+                        Crear
                     </Button>
                     </div>
                 }
@@ -52,7 +52,7 @@ const DrawerContainer: React.FC<props> = (props) => {
                     }
 
                 </Drawer>
-            </>
+            </Fragment>
         ) 
 }
 

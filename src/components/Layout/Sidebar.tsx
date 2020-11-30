@@ -30,9 +30,14 @@ const Sidebar: FC = () => {
           </Link>
         </Menu.Item>
         <SubMenu key="sub3" title="Opciones" icon={<SettingOutlined />} >
-          <Menu.Item key="oAyuda">Ayuda</Menu.Item>
-          <Menu.Item key="oError">Reportar error</Menu.Item>
-          <Menu.Item key="oCliente">Clientes</Menu.Item>
+          <Menu.Item key="oAyuda">
+            <Link href={`/Dashboard/Configuracion/Perfil`} >
+              <a href="#!" >Perfil</a>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="oCliente">Privacidad</Menu.Item>
+          <Menu.Item key="oCliente">Seguridad</Menu.Item>
+          <Menu.Item key="oError">Preferencias</Menu.Item>
         </SubMenu>
       </Menu>
     </Fragment>
