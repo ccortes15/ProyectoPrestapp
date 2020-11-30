@@ -72,8 +72,8 @@ const ProyeccionesList: FC<ListProps> = ({ data, typeContent }) => {
                 <List.Item
                     extra={
                         <span>
-                            <a key="list-loadmore-edit">Editar</a>
-                            <a key="list-loadmore-more">Eliminar</a>
+                            <a key="list-loadmore-edit" href="#!">Editar</a>
+                            <a key="list-loadmore-more" href="#!" style={{marginLeft: 4, color: 'red'}}>Eliminar</a>
                         </span>
                     }
                 >

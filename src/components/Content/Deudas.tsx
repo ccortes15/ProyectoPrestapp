@@ -61,7 +61,7 @@ const Deudas: FC = () => {
                         },
                         {
                             label: 'Total de pagos ',
-                            value: v.totalAmount.toString()
+                            value: `${5} de ${10}`
                         },
                         {
                             label: 'Estatus',
