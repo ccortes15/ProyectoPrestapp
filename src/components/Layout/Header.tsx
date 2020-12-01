@@ -23,7 +23,6 @@ const Header: FC = () => {
                     <Row justify="end">
                         <Col>
                             <Menu theme="light" mode="horizontal" style={{ float: 'right' }}>
-                                <Menu.Item key="search" icon={<SearchOutlined/>} />
                                 <SubMenu title="Agregar" key="add" icon={<PlusOutlined />}>
                                     <Menu.Item key="addDebt" icon={<PlusOutlined />}>
                                         <FormContainer transcType = {"deuda"} ao={"a"} >

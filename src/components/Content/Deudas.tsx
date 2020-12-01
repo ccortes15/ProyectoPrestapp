@@ -1,6 +1,5 @@
-import { Input, Row, Col } from 'antd';
-import { ChangeEvent, FC, Fragment, useState } from 'react';
-import { inputStyle } from './styles/Styles';
+import { Row, Col } from 'antd';
+import { FC, Fragment } from 'react';
 import MenuSidebar from './sidebar/MenuSidebar';
 import Filtros from './sidebar/items/Filtros';
 import ContentList from './list/ContentList';
@@ -26,7 +25,6 @@ interface DataToSend {
 }
 
 const Deudas: FC = () => {
-    const [searchValue, setSearch] = useState<string>('texto de prueba');
     let count:number = 0;
 
     const getDeudas = (): Deudas[] => {
@@ -79,10 +77,6 @@ const Deudas: FC = () => {
         return values;
     }
 
-    const onSearch = (value: string): void => {
-        setSearch(value)
-    }
-
     return (
         <Fragment>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
@@ -92,11 +86,6 @@ const Deudas: FC = () => {
                     </MenuSidebar>
                 </Col>
                 <Col span={19}>
-                    <Input
-                        style={inputStyle}
-                        placeholder="Buscar deuda"
-                        id="1"
-                        onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
                     <ContentList data={dataToSend()} typeContent="deuda" />
                 </Col>
             </Row>
