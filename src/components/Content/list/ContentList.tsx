@@ -75,12 +75,12 @@ const ProyeccionesList: FC<ListProps> = ({ data, typeContent }) => {
 
     return (
         <Fragment>
-            <Input
+            {/* <Input
                 style={inputStyle}
                 placeholder={`Buscar ${typeContent}`}
                 id="1"
                 value={searchValue}
-                onChange={(e: ChangeEvent<HTMLInputElement>): void => setSearch(e.target.value)} />
+                onChange={(e: ChangeEvent<HTMLInputElement>): void => setSearch(e.target.value)} /> */}
             <List
                 loading={initLoading}
                 itemLayout="vertical"

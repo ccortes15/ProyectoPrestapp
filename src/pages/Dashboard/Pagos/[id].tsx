@@ -5,9 +5,7 @@ import PagosContent from '../../../components/Content/Pagos';
 
 const Pagos: FC = () => {
     return(
-        <LayoutAdmin>
             <PagosContent />
-        </LayoutAdmin>
     )
 }
 

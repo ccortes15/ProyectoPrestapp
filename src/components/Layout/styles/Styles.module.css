@@ -1,0 +1,12 @@
+.menuItem:hover {
+    color: #1F2F59;
+    font-weight: bolder;
+}
+
+.aItem:link {
+    color: white;
+}
+
+.headerItem:hover {
+    color: white;
+}

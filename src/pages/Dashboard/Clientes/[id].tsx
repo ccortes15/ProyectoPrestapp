@@ -5,9 +5,7 @@ import ClientesContent from '../../../components/Content/Clientes';
 
 const Clientes: FC = () => {
     return(
-        <LayoutAdmin>
             <ClientesContent />
-        </LayoutAdmin>
     )
 }
 

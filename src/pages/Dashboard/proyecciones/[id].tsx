@@ -5,9 +5,7 @@ import Proyeccion from '../../../components/Content/Proyecciones';
 
 const Proyecciones: FC = () => {
     return(
-        <LayoutAdmin>
             <Proyeccion />
-        </LayoutAdmin>
     )
 }
 

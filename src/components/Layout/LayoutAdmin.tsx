@@ -1,7 +1,8 @@
 import { Layout, Breadcrumb } from 'antd';
 //import { HomeOutlined } from '@ant-design/icons';
 import { Fragment, FC, useState } from 'react';
-import { sidebarStyle, contentStyle } from './styles/Style';
+import styles from './styles/Styles.module.css';
+import {contentStyle, headerStyle, sidebarStyle} from './styles/Style';
 import HeaderContent from './Header';
 import SidebarContent from './Sidebar';
 //import { useRouter } from 'next/router'
@@ -36,7 +37,7 @@ const Login: FC = (props) => {
         <Fragment>
             <Layout>
                 <Sider
-                    theme="light"
+                    theme="dark"
                     style={sidebarStyle}
                     width={150}
                     collapsible
@@ -45,12 +46,11 @@ const Login: FC = (props) => {
                     <SidebarContent />
                 </Sider>
 
-                <Layout style={{ marginLeft: collapsed ? 80 : 150, transition: 'all 0.2s ease ' }}>
-                    <Header style={{ background: 'white' }} className="header">
+                <Layout style={{ marginLeft: collapsed ? 80 : 150, transition: 'margin-left 0.2s ease ' }}>
+                    <Header style={headerStyle} className="header">
                         <HeaderContent />
                     </Header>
                     <Content
-                        className="site-layout-background"
                         style={contentStyle}
                     >
                         <Breadcrumb separator=">">

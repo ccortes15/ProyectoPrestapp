@@ -63,7 +63,7 @@ const DashboardCards: FC = () => {
                 <Col span={24}>
                     <Row justify="end">
                         <Col>
-                            <Link href={`/Dashboard/proyecciones/${'1'}`} >
+                            <Link href={`/Dashboard/Proyecciones/${'1'}`} >
                                 <Button type="dashed" icon={<FontAwesomeIcon icon={faExternalLinkAlt} style={{ marginRight: 4 }} />} >
                                     Ir a proyecciones
                                 </Button>

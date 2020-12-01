@@ -4,8 +4,6 @@ import DashboardCards from '../../components/Content/DashboardCard';
 
 export default function Home() {
   return (
-      <LayoutAdmin>
         <DashboardCards />
-      </LayoutAdmin>
   )
 }
