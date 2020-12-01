@@ -1,7 +1,50 @@
-import React, { ChangeEvent, Fragment, useState } from 'react'
-import { Form, Col, Row, Input } from 'antd';
+import React, { ChangeEvent, ChangeEventHandler, Fragment, useState } from 'react'
+import { Form, Col, Row, Input, Select } from 'antd';
 import { __values } from 'tslib';
+import { Option } from 'antd/lib/mentions';
 
+const listaTerritorios = [
+    {
+        estado: "Aguascalientes",
+        municipio:"Aguascalientes"
+    },
+    {
+        estado: "Baja california",
+        municipio:"Tijuana"
+    },
+    {
+        estado: "CDMX",
+        municipio:"Cuahctemoc"        
+    },
+    {
+        estado: "Colima",
+        municipio:"Colima"
+    },
+    {
+        estado: "Durango",
+        municipio:"Durango"
+    },
+    {
+        estado: "Guanajuato",
+        municipio:"Guanajuato"
+    },
+    {
+        estado: "Hidalgo",
+        municipio:"Pachuca de soto"
+    },
+    {
+        estado: "Michoacan",
+        municipio:"Michoacan"
+    },
+    {
+        estado: "Puebla",
+        municipio:"Puebla"
+    },
+    {
+        estado: "Yucatan",
+        municipio:"Quintana Roo"
+    }
+]
 
 const ClientItem: React.FC = () => {
 
@@ -10,7 +53,8 @@ const ClientItem: React.FC = () => {
     const [ telefono, setTelefono ] = useState<ChangeEvent<HTMLInputElement>>()
     const [ calleNum, setCalleNum ] = useState<ChangeEvent<HTMLInputElement>>()
     const [ localidad, setLocalidad ] = useState<ChangeEvent<HTMLInputElement>>()
-    const [ estado, setEstado ] = useState<ChangeEvent<HTMLInputElement>>()
+    const [ estado, setEstado ] = useState<string>('')
+    const [ municipio, setMunicipio ] = useState<string>('')
 
         return (
             <Fragment>
@@ -115,11 +159,37 @@ const ClientItem: React.FC = () => {
                                 name="estado"
                                 label="Estado"
                             >
-                                <Input
-                                    onChange={ (value: ChangeEvent<HTMLInputElement>) => setEstado(value) }
-                                    style={{ width: '100%' }} 
-                                    placeholder="Ingresar estado de residencia"
-                                />
+                                <Select
+                                    onChange={(value: string) => setEstado(value)}
+                                    style={{
+                                        fontWeight: "normal"
+                                    }} 
+                                    placeholder="Seleccione un cliente"
+                                    allowClear
+                                    >
+                                        {listaTerritorios.map((estado, index) => (
+                                            <Option key={"3"} value = {estado.estado} >{estado.estado}</Option>
+                                        ))}
+                                </Select>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="municipio"
+                                label="Municipio"
+                            >
+                                <Select
+                                    onChange={(value: string) => setEstado(value)}
+                                    style={{
+                                        fontWeight: "normal"
+                                    }} 
+                                    placeholder="Seleccione un cliente"
+                                    allowClear
+                                    >
+                                        {listaTerritorios.map((territorio, index) => (
+                                            <Option key={"3"} value = {territorio.municipio} >{territorio.municipio}</Option>
+                                        ))}
+                                </Select>
                             </Form.Item>
                         </Col>
                     </Row>

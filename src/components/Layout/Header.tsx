@@ -44,21 +44,21 @@ const Header: FC = () => {
                                 <Menu.Item key="notification" icon={<NotificationOutlined/>}>
                                     Notificaciones
                                 </Menu.Item>
-                                <SubMenu title="Usuario" key="user" icon={<UserOutlined/>}>
-                                <SubMenu key="sub3" title="Opciones" icon={<SettingOutlined />} >
+                                <SubMenu title="usuario" key="user" icon={<UserOutlined/>}>
+                                <SubMenu key="opciones" title="Opciones" icon={<SettingOutlined />} >
                                         <Menu.Item key="oAyuda">
                                             <Link href={`/Dashboard/Configuracion/Perfil`} >
                                             <a href="#!" >Perfil</a>
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item key="oCliente">Privacidad</Menu.Item>
-                                        <Menu.Item key="oCliente">Seguridad</Menu.Item>
-                                        <Menu.Item key="oError">Preferencias</Menu.Item>
+                                        <Menu.Item key="oSeguridad">Seguridad</Menu.Item>
+                                        <Menu.Item key="oPreferencias">Preferencias</Menu.Item>
                                         </SubMenu>
-                                    <Menu.Item key="addPay" icon={<HistoryOutlined />}>
+                                    <Menu.Item key="historial" icon={<HistoryOutlined />}>
                                         Historial
                                     </Menu.Item>
-                                    <Menu.Item key="addClient" icon={<LogoutOutlined />}>
+                                    <Menu.Item key="cerrarSesion" icon={<LogoutOutlined />}>
                                         Cerrar sesión
                                     </Menu.Item>
                                 </SubMenu>

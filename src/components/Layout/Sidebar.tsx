@@ -35,9 +35,9 @@ const Sidebar: FC = () => {
               <a href="#!" >Perfil</a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="oCliente">Privacidad</Menu.Item>
-          <Menu.Item key="oCliente">Seguridad</Menu.Item>
-          <Menu.Item key="oError">Preferencias</Menu.Item>
+          <Menu.Item key="privacidad">Privacidad</Menu.Item>
+          <Menu.Item key="seguridad">Seguridad</Menu.Item>
+          <Menu.Item key="pref">Preferencias</Menu.Item>
         </SubMenu>
       </Menu>
     </Fragment>

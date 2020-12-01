@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import ContainerStructure from './ContainerStructure'
 
 type props = {
@@ -8,7 +8,7 @@ type props = {
 
 export const FormContainer: React.FC<props> = (props) => {
         return (
-            <>
+            <Fragment>
                 <ContainerStructure 
                     transcType = {props.transcType}
                     ao = {props.ao}
@@ -18,7 +18,7 @@ export const FormContainer: React.FC<props> = (props) => {
                 
                 }
                 </ContainerStructure>
-            </>
+            </Fragment>
         ) 
 }
 

@@ -1,8 +1,9 @@
-import { Form, DatePicker, Select, Divider, Checkbox, Badge } from 'antd';
+import { Form, DatePicker, Select, Divider, Row, Col } from 'antd';
 import { FC, Fragment } from "react";
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import {capitalizeName} from '../../functions/Functions';
 import SliderItems from './SliderItems';
+import Etiquetas from '../../Etiquetas';
 
 const { Option } = Select;
 
@@ -126,36 +127,7 @@ const FormItems: FC<FiltrosProps> = ({isPago}) => {
             <Divider plain>
                 Etiquetas
             </Divider>
-
-            <Form.Item name="nombreEtiqueta" label="Nombre de etiqueta">
-                <Select
-                    style={{ width: '100%' }}
-                    showSearch
-                    placeholder="Seleccionar:"
-                    optionFilterProp="value"
-                    filterOption={(inputValue, option) =>
-                        option.value.toLowerCase().indexOf(inputValue.toLowerCase()) >= 0
-                    }
-                    allowClear
-                >
-                    {getEtiqueta(etiquetaList, 'name').map((opt: OptionSelectType, i: number) => (
-                        <Option key={i} value={opt.value}>{capitalizeName(opt.label)}</Option>
-                    ))}
-                </Select>
-            </Form.Item>
-
-            <Form.Item name="colorEtiqueta" label="Color de etiqueta">
-                <Checkbox.Group style={{ width: '100%' }} onChange={(checkedValue: CheckboxValueType[]): void => console.log(checkedValue)}>
-                    {getEtiqueta(etiquetaList, 'color').map((opt: OptionSelectType, i: number) => (
-                        <div key={i}>
-                            <Checkbox value={opt.value}>
-                                <Badge color={opt.label} />
-                            </Checkbox>
-                        </div>
-
-                    ))}
-                </Checkbox.Group>
-            </Form.Item>
+            <Etiquetas/>
         </Fragment>
     )
 }
