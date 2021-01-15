@@ -19,3 +19,10 @@ export const inputStyle: CSS.Properties = {
     marginBottom: '8px',
     borderRadius: '4px'
 }
+
+export const listStyle: CSS.Properties = {
+    backgroundColor: 'white',
+    marginBottom: '5px',
+    borderRadius: '10px',
+    padding: '10px'
+}

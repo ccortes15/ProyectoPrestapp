@@ -1,37 +1,23 @@
-import { Layout, Breadcrumb } from 'antd';
-//import { HomeOutlined } from '@ant-design/icons';
+import { Layout, Breadcrumb, Grid } from 'antd';
+import { RightOutlined, LeftOutlined } from '@ant-design/icons';
 import { Fragment, FC, useState } from 'react';
 import styles from './styles/Styles.module.css';
 import {contentStyle, headerStyle, sidebarStyle} from './styles/Style';
 import HeaderContent from './Header';
 import SidebarContent from './Sidebar';
-//import { useRouter } from 'next/router'
 
-const { Header, Content, Sider } = Layout;
+const {useBreakpoint} = Grid;
+const { Header, Content, Sider, Footer } = Layout;
 
-const Login: FC = (props) => {
+const LayoutAdmin: FC = (props) => {
     const [collapsed, setCollapsed] = useState(true)
-    // const router = useRouter()
-    // const path = router.asPath;
+    const screens = useBreakpoint();
 
-    // const getBread = (route: string): string[] => {
-    //     const bread = route.split("/")
-    //     let values = [];
-    //     let ref = "/";
-
-    //     bread.shift();
-
-    //     for(let b of bread){
-    //         ref = ref + b + '/';
-
-    //         values.push({
-    //             bread: b,
-    //             ref: ref
-    //         })
-    //     }
-
-    //     return values;
-    // }
+    const getSize = () => {
+        return Object.entries(screens)
+            .filter(screen => !!screen[1])
+            .map(screen => (screen[0]))
+    }
 
     return (
         <Fragment>
@@ -42,6 +28,10 @@ const Login: FC = (props) => {
                     width={150}
                     collapsible
                     collapsed={collapsed}
+                    trigger={getSize().length > 1 
+                        ? collapsed ? <RightOutlined /> : <LeftOutlined /> 
+                        : null
+                    }
                     onCollapse={() => setCollapsed(!collapsed)} >
                     <SidebarContent />
                 </Sider>
@@ -60,14 +50,15 @@ const Login: FC = (props) => {
                                 </Breadcrumb.Item>
                             ))} */}
                         </Breadcrumb>
-                        <div className="site-layout-background" style={{ padding: 20, minHeight: 360 }}>
+                        <div className="site-layout-background" style={{ padding: getSize().length > 1 ? 20 : 2, minHeight: 360 }}>
                             {props.children}
                         </div>
                     </Content>
+                    <Footer style={{ textAlign: 'center', backgroundColor: '#ffff', paddingBottom: 0 }}>©{new Date().getFullYear()} Created by Finanset</Footer>
                 </Layout>
             </Layout>
         </Fragment>
     )
 };
 
-export default Login;
+export default LayoutAdmin;

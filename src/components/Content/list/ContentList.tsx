@@ -1,9 +1,13 @@
-import { List, Avatar, Button, Skeleton, Input, Descriptions } from 'antd';
-import { FC, useState, useEffect, Fragment, ChangeEvent} from 'react';
-import { inputStyle } from '../styles/Styles';
+import { List, Avatar, Button, Skeleton, Descriptions, Input, Row, Col, Grid } from 'antd';
+import { EditOutlined, DeleteOutlined, AudioOutlined } from '@ant-design/icons';
+import { FC, useState, useEffect, Fragment, ChangeEvent, ReactNode } from 'react';
+import { listStyle } from '../styles/Styles';
+
+const { Search } = Input;
+const { useBreakpoint } = Grid;
 
 interface SendData {
-    label: string;
+    label: ReactNode;
     value: string;
 }
 
@@ -23,21 +27,24 @@ const ProyeccionesList: FC<ListProps> = ({ data, typeContent }) => {
     const [dataList, setDataList] = useState<PropsValue[]>([]);
     const [list, setList] = useState<PropsValue[]>([]);
     const [searchValue, setSearch] = useState<string>('');
+    const screens = useBreakpoint();
+
+    const getSize = () => {
+        return Object.entries(screens)
+        .filter(screen => !!screen[1])
+        .map(screen => (
+            screen[0]
+        ))
+    }
 
     useEffect(() => (
         getData(data)
     ), [])
 
-    // const onSearch = useMemo(() => {
-
-    //     if(!searchValue) return dataList;
-
-    // }, [searchValue, dataList]) 
-
     const getData = (dataList: PropsValue[]): void => {
         let values = [];
         console.log(dataList)
-        for(let i = 0; i < dataList.length; i++){
+        for (let i = 0; i < dataList.length; i++) {
             values.push(dataList[i].data)
         }
         setInitLoading(false);
@@ -75,12 +82,14 @@ const ProyeccionesList: FC<ListProps> = ({ data, typeContent }) => {
 
     return (
         <Fragment>
-            {/* <Input
-                style={inputStyle}
-                placeholder={`Buscar ${typeContent}`}
-                id="1"
-                value={searchValue}
-                onChange={(e: ChangeEvent<HTMLInputElement>): void => setSearch(e.target.value)} /> */}
+            <Search
+                style={{ marginBottom: 10 }}
+                placeholder="Buscar"
+                size="large"
+                onSearch={(value) => console.log(value)}
+                suffix={<AudioOutlined style={{ fontSize: 16, color: '#1890ff' }} />}
+                enterButton
+            />
             <List
                 loading={initLoading}
                 itemLayout="vertical"
@@ -88,12 +97,7 @@ const ProyeccionesList: FC<ListProps> = ({ data, typeContent }) => {
                 dataSource={list}
                 renderItem={item => (
                     <List.Item
-                        extra={
-                            <span>
-                                <a key="list-loadmore-edit" href="#!">Editar</a>
-                                <a key="list-loadmore-more" href="#!" style={{ marginLeft: 4, color: 'red' }}>Eliminar</a>
-                            </span>
-                        }
+                        style={listStyle}
                     >
                         <Skeleton avatar title={false} loading={loading} active>
                             <List.Item.Meta
@@ -101,9 +105,25 @@ const ProyeccionesList: FC<ListProps> = ({ data, typeContent }) => {
                                     ? <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                                     : null
                                 }
-                                title={<a href="https://ant.design">{`${typeContent.toUpperCase()}: ${item.id}`}</a>}
+                                title={<Row>
+                                    <Col xl={{span:14}} lg={{span:14}} md={{span:12}} sm={{span:24}} xs={{span:24}}>
+                                        <a href="https://ant.design">{`${typeContent.toUpperCase()}: ${item.id}`}</a>
+                                    </Col>
+                                    <Col xl={{span:6, offset: 4}} lg={{span:7, offset: 3}} md={{span:9, offset: 3}} sm={{span:24}} xs={{span:24}}>
+                                        <span>
+                                            <Button type="primary" icon={<EditOutlined />} key="list-loadmore-edit" href="#!" >
+                                                {''}
+                                            </Button>
+                                            <Button type="primary" icon={<DeleteOutlined />} key="list-loadmore-more" href="#!" style={{ marginLeft: 4 }} danger>
+                                                {''}
+                                            </Button>
+                                        </span>
+                                    </Col>
+                                </Row>}
                             />
-                            <Descriptions>
+                            <Descriptions 
+                                column={{ xxl: 3, xl: 3, lg: 3, md: 2, sm: 2, xs: 1 }} 
+                                layout={getSize().length > 1 ? 'horizontal' : 'vertical'}>
                                 {item.data.map((dato: SendData, i: number) => (
                                     <Descriptions.Item key={i} label={dato.label}>{dato.value}</Descriptions.Item>
                                 ))}

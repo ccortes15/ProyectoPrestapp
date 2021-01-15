@@ -1,33 +1,29 @@
-import { Input, Row, Col } from 'antd';
-import { ChangeEvent, FC, Fragment, useState } from 'react';
-import { inputStyle } from './styles/Styles';
-import MenuSidebar from './sidebar/MenuSidebar';
-import FiltrosProye from './sidebar/items/FiltrosProye';
-import ListProyecciones from './list/ContentList';
+import { Row, Col, Button } from 'antd';
+import { FC, Fragment } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faReply } from '@fortawesome/free-solid-svg-icons'
+import LineChart from './Charts/LineChart';
+import BarChart from './Charts/BarChart';
+import DoughChart from './Charts/DougChart';
+import Link from 'next/link';
 
 const Proyecciones: FC = () => {
-    const [searchValue, setSearch] = useState<string>('texto de prueba');
-
-    const onSearch = (value: string): void => {
-        setSearch(value)
-    }
-
-    console.log(searchValue);
-
     return (
         <Fragment>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                <Col span={5}>
-                    <MenuSidebar>
-                        <FiltrosProye />
-                    </MenuSidebar>
+            <Row justify="center" style={{ marginBottom: 8 }}>
+                <Col xl={{ span: 20 }} lg={{ span: 20 }} md={{ span: 24 }} sm={{ span: 24 }} xs={{ span: 24 }}>
+                    <Link href={`/Dashboard/${'Inicio'}`} >
+                        <Button type="dashed" icon={<FontAwesomeIcon icon={faReply} style={{ marginRight: 4 }} />} block >
+                            Regresar a Inicio
+                        </Button>
+                    </Link>
                 </Col>
-                <Col span={19}>
-                    <Input 
-                        style={inputStyle}
-                        placeholder="Buscar proyección"
-                        id="1"
-                        onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
+            </Row>
+            <Row justify="center">
+                <Col xl={{ span: 20 }} lg={{ span: 20 }} md={{ span: 24 }} sm={{ span: 24 }} xs={{ span: 24 }}>
+                    <BarChart />
+                    <LineChart />
+                    <DoughChart />
                 </Col>
             </Row>
         </Fragment >

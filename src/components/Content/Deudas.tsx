@@ -1,5 +1,6 @@
-import { Row, Col } from 'antd';
-import { FC, Fragment } from 'react';
+import { Row, Col, Tag } from 'antd';
+import { FC, Fragment, ReactNode } from 'react';
+import {UserOutlined, DollarOutlined, NumberOutlined, CalendarOutlined } from '@ant-design/icons';
 import MenuSidebar from './sidebar/MenuSidebar';
 import Filtros from './sidebar/items/Filtros';
 import ContentList from './list/ContentList';
@@ -15,7 +16,7 @@ interface Deudas {
 }
 
 interface SendData {
-    label: string;
+    label: ReactNode;
     value: string;
 }
 
@@ -54,19 +55,27 @@ const Deudas: FC = () => {
                 id: `${count++}`,
                 data: [
                         {
-                            label: 'Nombre deudor',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                                <UserOutlined style={{marginRight: 2}} />Nombre deudor
+                                </Tag>,
                             value: v.debtor
                         },
                         {
-                            label: 'Total de pagos ',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                                <NumberOutlined style={{marginRight: 2}} />Total de pagos
+                            </Tag>,
                             value: `${5} de ${10}`
                         },
                         {
-                            label: 'Estatus',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                            <CalendarOutlined style={{marginRight: 2}} />Fecha de deuda
+                            </Tag>,
                             value: v.estimateDueDate
                         },
                         {
-                            label: 'Cantidad total pagada',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                                <DollarOutlined style={{marginRight: 2}} />Cantidad total pagada
+                            </Tag>,
                             value: `$ ${v.totalAmount}`
                         }
                     ]
@@ -79,13 +88,13 @@ const Deudas: FC = () => {
 
     return (
         <Fragment>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                <Col span={5}>
+            <Row>
+                <Col lg={{span: 5}} xs={{span: 24}} style={{marginBottom: 8}}>
                     <MenuSidebar>
                         <Filtros />
                     </MenuSidebar>
                 </Col>
-                <Col span={19}>
+                <Col lg={{span: 18, offset: 1}} xs={{span: 24}}>
                     <ContentList data={dataToSend()} typeContent="deuda" />
                 </Col>
             </Row>

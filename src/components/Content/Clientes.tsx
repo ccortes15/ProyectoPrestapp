@@ -1,6 +1,6 @@
-import { Input, Row, Col } from 'antd';
-import { ChangeEvent, FC, Fragment, useState } from 'react';
-import { inputStyle } from './styles/Styles';
+import { Row, Col, Tag } from 'antd';
+import { FC, Fragment, ReactNode } from 'react';
+import {HomeOutlined, PhoneOutlined, MailOutlined} from '@ant-design/icons';
 import MenuSidebar from './sidebar/MenuSidebar';
 import ContentList from './list/ContentList';
 import {capitalizeName} from './functions/Functions';
@@ -15,7 +15,7 @@ interface Cliente {
 }
 
 interface SendData {
-    label: string;
+    label: ReactNode;
     value: string;
 }
 
@@ -25,12 +25,6 @@ interface DataToSend {
 }
 
 const Clientes: FC = () => {
-    const [searchValue, setSearch] = useState<string>('texto de prueba');
-
-    const onSearch = (value: string): void => {
-        setSearch(value)
-    }
-
     const getDeudas = (): Cliente[] => {
         const dataDeuda: Cliente[] = []
         for (let i = 0; i < 20; i++) {
@@ -38,7 +32,7 @@ const Clientes: FC = () => {
                 {
                     firstName: `carlos adrian`,
                     lastName: `cortes melendez`,
-                    address: 'v. bonfil #398',
+                    address: 'address #198',
                     email: 'ccortes15@ucol.mx',
                     alias: 'adrianCo',
                     phone: '1234567890',
@@ -57,12 +51,22 @@ const Clientes: FC = () => {
                 id: capitalizeName(v.firstName + ' ' + v.lastName),
                 data: [
                         {
-                            label: 'Domicilio',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                                <HomeOutlined style={{marginRight: 2}} />Domicilio
+                            </Tag>,
                             value: v.address
                         },
                         {
-                            label: 'Teléfono',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                            <PhoneOutlined style={{marginRight: 2}} />Teléfono
+                            </Tag>,
                             value: v.phone
+                        },
+                        {
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                            <MailOutlined style={{marginRight: 2}} />Correo
+                            </Tag>,
+                            value: v.email
                         }
                     ]
                 }
@@ -74,17 +78,11 @@ const Clientes: FC = () => {
 
     return (
         <Fragment>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                <Col span={5}>
+            <Row>
+                <Col lg={{span: 5}} xs={{span: 24}} style={{marginBottom: 8}}>
                     <MenuSidebar isCliente />
                 </Col>
-                <Col span={19}>
-                    <Input 
-                        style={inputStyle}
-                        placeholder="Buscar cliente por: (Nombre, Teléfono, Correo, Domicilio)"
-                        id="1"
-                        onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
-
+                <Col lg={{span: 18, offset: 1}} xs={{span: 24}}>
                     <ContentList data={dataToSend()} typeContent="cliente" />
                 </Col>
             </Row>

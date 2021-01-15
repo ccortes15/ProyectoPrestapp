@@ -1,6 +1,6 @@
-import { Input, Row, Col } from 'antd';
-import { ChangeEvent, FC, Fragment, useState } from 'react';
-import { inputStyle } from './styles/Styles';
+import { Row, Col, Tag } from 'antd';
+import { FC, Fragment, ReactNode} from 'react';
+import {UserOutlined, DollarOutlined, IdcardOutlined, CalendarOutlined } from '@ant-design/icons';
 import MenuSidebar from './sidebar/MenuSidebar';
 import Filtros from './sidebar/items/Filtros';
 import ContentList from './list/ContentList';
@@ -14,7 +14,7 @@ interface Pagos {
 }
 
 interface SendData {
-    label: string;
+    label: ReactNode;
     value: string;
 }
 
@@ -24,7 +24,6 @@ interface DataToSend {
 }
 
 const Pagos: FC = () => {
-    const [searchValue, setSearch] = useState<string>('texto de prueba');
     let count = 0;
 
     const getDeudas = (): Pagos[] => {
@@ -52,19 +51,27 @@ const Pagos: FC = () => {
                 id: `${count++}`,
                 data: [
                         {
-                            label: 'Nombre deudor',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                            <UserOutlined style={{marginRight: 2}} />Nombre deudor
+                            </Tag>,
                             value: v.debtor
                         },
                         {
-                            label: 'Deuda correspondiente',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                                <IdcardOutlined style={{marginRight: 2}} />Deuda correspondiente
+                            </Tag>,
                             value: v.owner
                         },
                         {
-                            label: 'Cantidad',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                                <DollarOutlined style={{marginRight: 2}} />Cantidad
+                            </Tag>,
                             value: `$ ${v.amount}`
                         },
                         {
-                            label: 'Fecha de pago',
+                            label: <Tag style={{fontSize: 14, fontWeight: 'bolder', color: '#095457'}}>
+                                <CalendarOutlined style={{marginRight: 2}} />Fecha de pago
+                            </Tag>,
                             value: v.paidAt
                         }
                     ]
@@ -75,24 +82,15 @@ const Pagos: FC = () => {
         return values;
     }
 
-    const onSearch = (value: string): void => {
-        setSearch(value)
-    }
-
     return (
         <Fragment>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                <Col span={5}>
+            <Row>
+                <Col lg={{span: 5}} xs={{span: 24}} style={{marginBottom: 8}}>
                     <MenuSidebar>
                         <Filtros isPago />
                     </MenuSidebar>
                 </Col>
-                <Col span={19}>
-                    <Input 
-                        style={inputStyle}
-                        placeholder="Buscar pago"
-                        id="1"
-                        onChange={(e: ChangeEvent<HTMLInputElement>): void => onSearch(e.target.value)} />
+                <Col lg={{span: 18, offset: 1}} xs={{span: 24}}>
                     <ContentList data={dataToSend()} typeContent="pago" />
                 </Col>
             </Row>
